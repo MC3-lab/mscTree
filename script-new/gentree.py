@@ -1,3 +1,6 @@
+import numpy as np
+import itertools
+
 # Class Event: transition of a PT nets; self-loops allowed
 class Event:
     def __init__ (self, lab, pre, post) :
@@ -16,11 +19,11 @@ class Event:
 
 # Class Nodo: a node in the max step tree of a free-choice net
 class Nodo:
-  def __init__(self, marking):
+  def __init__(self, marking, trace):
     self.mrk      = marking
     self.children = []
     self.isomrk   = None  # Ancestor with same marking
-    self.label    = None
+    self.trace    = trace
     self.dead     = 0  # 1: is a deadlock
 
   def printsubtree (self, level):
@@ -28,9 +31,80 @@ class Nodo:
     while i < level:
         print ("    ", end='')
         i = i+1
-    print (self.label, " ", self.mrk, "  ", self.dead)
+#    print (self.label, " ", self.mrk, "  ", self.dead)
+#    if self.children == [] and self.dead == 0:
+    print(self.mrk, "  ", self.dead, "  ", self.trace)
+#    else:
+#      print (self.mrk, "  ", self.dead)      
     for c in self.children:
       c.printsubtree(level+1)
+      
+def conflict_set(pre):
+  """Input: a row of the incidence matrix with preconditions
+     Output: a set with all the transitions having the row precondition as input
+  """
+  confl = set([])
+  for i in range (0, pre.shape[0]):
+    if pre[i] != 0:
+      confl.add(i)
+  return confl
+
+def conflict_partition(m1):
+  """Input: incidence matrix with preconditions
+     Output: list of sets, where each set is a clique of conflict relation
+     Since the net is equal-conflict, the sets form a partition of transitions.
+  """
+  m1_rows, m1_col = m1.shape
+  added = set([])
+  cp = []
+  for t in range (0, m1_col):  
+    if t not in added:
+      i = 0
+      while m1[i][t] == 0 :
+        i = i + 1
+      t_confl = conflict_set(m1[i])
+      added = added.union(t_confl)
+      cp.append(t_confl)
+  return cp
+
+def find_cardinality(t, col_t, marking):
+  """Input: a transition t, the column with the preset of t and a marking
+     Output: the number of times in which t can fire in m
+  """
+  i = 0
+  r = marking
+  while np.all(r >= col_t):
+    r = r - col_t
+    i = i + 1
+  return i
+  
+def maxstep2list(maxsteps,numt):
+  list_steps = []
+  if maxsteps != [()]:
+    for step in maxsteps:
+      lstep = np.zeros(numt, np.uint8)
+      for part in step:
+        for i in part:
+          lstep[i] += 1
+      list_steps.append(lstep)
+  return list_steps
+        
+  
+def compute_maximal_steps(m1, marking, confl):
+  """Input: incidence matrix with preconditions, a marking, the events partitioned in conflicts
+     Output: the maximal steps enabled in the marking
+  """
+  steps = []
+  for c in confl:
+    t = c.pop()
+    c.add(t)
+    n = find_cardinality(t, m1[:,t], marking)
+    if n > 0:
+      step_part = list(itertools.combinations_with_replacement(c, n))
+      steps.append(step_part)
+  maxsteps = list(itertools.product(*steps))
+  ms = maxstep2list(maxsteps, m1.shape[1])
+  return ms
 
 # Function nextmrk: compute new marking when step s fires at m
 def nextmrk (m, s):
@@ -39,6 +113,15 @@ def nextmrk (m, s):
     nm[i] = m[i] - s.pre[i] + s.post[i]
   return nm
 
+def nextmrk_step(m, step, events):
+  inpu = np.zeros(len(m), np.uint8)
+  outpu = np.zeros(len(m), np.uint8)
+  for i in range(0, len(step)):
+    inpu = inpu + step[i] * np.array(events[i].pre)
+    outpu = outpu + step[i] * np.array(events[i].post)
+  new_m = m - inpu + outpu
+  return new_m
+
 def listenabled(m, events):
   lse = []
   for t in events:
@@ -46,26 +129,36 @@ def listenabled(m, events):
       lse.append(t)
   return lse
 
-def genMSCT (node, vm, ltr, events):
-  if node.mrk in vm:   # Repeated marking
-    #update ancestor of node
+def genMSCT (mat, node, vn, ltr, events, confl_set): 
+  # vn: list of visited nodes in a path 
+  for x in vn:
+    if np.array_equal(node.mrk, x.mrk) == True:   # Repeated marking
+      node.isomrk = x
+      return
+#    ltr = listenabled(node.mrk, events)
+  ltr = compute_maximal_steps(mat, node.mrk, confl_set)
+  cltr = ltr.copy()
+  if len(ltr) == 0:    # Deadlock
+    node.dead = 1
     return
   else:
-    ltr = listenabled(node.mrk, events)
-    cltr = ltr.copy()
-    if len(ltr) == 0:    # Deadlock
-      node.dead = 1
-      return
-    else:
-      for t in cltr:
-        vm.append(node.mrk)
-        cvm = vm.copy()
-        nm = nextmrk (node.mrk, t)
-        newn = Nodo (nm)
-        newn.label = t.lab
-        node.children.append(newn)
-        genMSCT (newn, cvm, ltr, events)
-    return
+    for step in cltr:
+      vn.append(node)
+      cvn = vn.copy()
+      nm = nextmrk_step (node.mrk, step, events)
+      newn = Nodo (nm, node.trace + step)
+      node.children.append(newn)
+      genMSCT (mat, newn, cvn, ltr, events, confl_set)
+  return
+
+#input_m = np.array(([1,1,0,0,0,0,0],[0,0,1,1,0,0,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,1]))  
+input_m = np.array(([0,0,0,0,0,0],[1,0,0,0,0,0],[0,1,1,0,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]))
+marking = np.array([0,1,1,0,0,0,0])
+marking2 = np.array([2,0,0,1,0,0,0])
+test = conflict_partition(input_m)
+ms = compute_maximal_steps(input_m, marking, test)
+#print(ms)
+#print(ms[0][0])
 
 m = [0,1,1,0,0,0,0]
 
@@ -76,7 +169,8 @@ d=Event('d',[0,0,0,1,1,0,0],[0,1,1,0,0,0,0])
 e=Event('e',[0,0,0,0,0,1,0],[1,0,0,0,0,0,0])
 f=Event('f',[0,0,0,0,0,0,1],[0,0,0,0,0,1,0])
 eventi = [a,b,c,d,e,f]
-n = Nodo(m)
+trace = np.zeros(len(eventi), np.uint8)
+n = Nodo(marking, trace)
 enab = listenabled(m, eventi)
-vmrk = []
-genMSCT(n, vmrk, [], eventi)
+vn = []
+#genMSCT(input_m, n, vn, [], eventi, test)

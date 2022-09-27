@@ -170,13 +170,12 @@ def findPaths(n, x, leaves):
   if n.children == []:
     hasX = False
     i = 0
-    while hasX == False and i < len(n.trace):
-      if i in x and n.trace[i] > 0:
+    while i < len(x) and hasX == False:
+      if n.trace[x[i]] > 0:
+        leaves.append(n)
         hasX = True
       else:
         i = i + 1
-    if i != len(n.trace):
-      leaves.append(n)
   else:
     for child in n.children:
       leaves = findPaths(child, x, leaves)
@@ -209,5 +208,5 @@ enab = listenabled(m, eventi)
 vn = []
 genMSCT(net.prem, n, vn, [], eventi, test)
 n.printsubtree(0)
-leaves = findPaths(n, [3], [])
+leaves = findPaths(n, [3,4], [])
 print(leaves)

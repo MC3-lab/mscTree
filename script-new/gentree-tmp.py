@@ -7,14 +7,13 @@ class PTnet:
     self.postm = postm
     self.m0 = m0
     
-  def eventList(self):
+  def events(self):
     events = []
-    for i in range(0, self.prem.shape[1]):
+    for i in range(0, prem.shape[1]):
       pre = self.prem[:,i]
       post = self.postm[:,i]
       ev = Event(pre, post)
       events.append(ev)
-    return events
 
 # Class Event: transition of a PT nets; self-loops allowed
 class Event:
@@ -50,9 +49,6 @@ class Nodo:
     print(self.mrk, "  ", self.dead, "  ", self.trace)     
     for c in self.children:
       c.printsubtree(level+1)
-  
-  def __repr__(self):
-      return str(self.mrk) + " " + str(self.trace) + "  " + str(self.dead)
       
 def conflict_set(pre):
   """Input: a row of the incidence matrix with preconditions
@@ -132,8 +128,8 @@ def nextmrk_step(m, step, events):
   inpu = np.zeros(len(m), np.uint8)
   outpu = np.zeros(len(m), np.uint8)
   for i in range(0, len(step)):
-    inpu = inpu + step[i] * events[i].pre
-    outpu = outpu + step[i] * events[i].post
+    inpu = inpu + step[i] * np.array(events[i].pre)
+    outpu = outpu + step[i] * np.array(events[i].post)
   new_m = m - inpu + outpu
   return new_m
 
@@ -144,7 +140,7 @@ def listenabled(m, events):
       lse.append(t)
   return lse
 
-def genMSCT(mat, node, vn, ltr, events, confl_set): 
+def genMSCT (mat, node, vn, ltr, events, confl_set): 
   # vn: list of visited nodes in a path 
   for x in vn:
     if np.array_equal(node.mrk, x.mrk) == True:   # Repeated marking
@@ -166,48 +162,26 @@ def genMSCT(mat, node, vn, ltr, events, confl_set):
       genMSCT (mat, newn, cvn, ltr, events, confl_set)
   return
 
-def findPaths(n, x, leaves):
-  if n.children == []:
-    hasX = False
-    i = 0
-    while hasX == False and i < len(n.trace):
-      if i in x and n.trace[i] > 0:
-        hasX = True
-      else:
-        i = i + 1
-    if i != len(n.trace):
-      leaves.append(n)
-  else:
-    for child in n.children:
-      leaves = findPaths(child, x, leaves)
-  return leaves
-
 #input_m = np.array(([1,1,0,0,0,0,0],[0,0,1,1,0,0,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,1]))  
 input_m = np.array(([0,0,0,0,0,0],[1,0,0,0,0,0],[0,1,1,0,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]))
-output_m = np.array(([0,0,0,0,1,0], [0,0,0,1,0,0], [0,0,0,1,0,0], [1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,1],[0,0,1,0,0,0]))
 marking = np.array([0,1,1,0,0,0,0])
-net = PTnet(input_m, output_m, marking)
 marking2 = np.array([2,0,0,1,0,0,0])
 test = conflict_partition(input_m)
-eventi = net.eventList()
-#ms = compute_maximal_steps(input_m, marking, test)
+ms = compute_maximal_steps(input_m, marking, test)
 #print(ms)
 #print(ms[0][0])
 
 m = [0,1,1,0,0,0,0]
 
-#a=Event('a',[0,1,0,0,0,0,0],[0,0,0,1,0,0,0])
-#b=Event('b',[0,0,1,0,0,0,0],[0,0,0,0,1,0,0])
-#c=Event('c',[0,0,1,0,0,0,0],[0,0,0,0,0,1,1])
-#d=Event('d',[0,0,0,1,1,0,0],[0,1,1,0,0,0,0])
-#e=Event('e',[0,0,0,0,0,1,0],[1,0,0,0,0,0,0])
-#f=Event('f',[0,0,0,0,0,0,1],[0,0,0,0,0,1,0])
-#eventi = [a,b,c,d,e,f]
+a=Event('a',[0,1,0,0,0,0,0],[0,0,0,1,0,0,0])
+b=Event('b',[0,0,1,0,0,0,0],[0,0,0,0,1,0,0])
+c=Event('c',[0,0,1,0,0,0,0],[0,0,0,0,0,1,1])
+d=Event('d',[0,0,0,1,1,0,0],[0,1,1,0,0,0,0])
+e=Event('e',[0,0,0,0,0,1,0],[1,0,0,0,0,0,0])
+f=Event('f',[0,0,0,0,0,0,1],[0,0,0,0,0,1,0])
+eventi = [a,b,c,d,e,f]
 trace = np.zeros(len(eventi), np.uint8)
 n = Nodo(marking, trace)
 enab = listenabled(m, eventi)
 vn = []
-genMSCT(net.prem, n, vn, [], eventi, test)
-n.printsubtree(0)
-leaves = findPaths(n, [3], [])
-print(leaves)
+#genMSCT(input_m, n, vn, [], eventi, test)

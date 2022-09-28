@@ -94,6 +94,10 @@ def find_cardinality(t, col_t, marking):
   return i
   
 def maxstep2list(maxsteps,numt):
+  """Input: the list of maximal steps as tuples of tuples and the number of transitions in the net
+     Output: the list of maximal steps as a numpy array where in each position there is the number of 
+     occurrences of the transition in the step
+  """
   list_steps = []
   if maxsteps != [()]:
     for step in maxsteps:
@@ -129,6 +133,9 @@ def nextmrk (m, s):
   return nm
 
 def nextmrk_step(m, step, events):
+  """Input: the current marking, a step of transitions and the list of events of the net
+     Output: the marking obtained from the current marking after the execution of the step
+  """
   inpu = np.zeros(len(m), np.uint8)
   outpu = np.zeros(len(m), np.uint8)
   for i in range(0, len(step)):
@@ -145,6 +152,11 @@ def listenabled(m, events):
   return lse
 
 def genMSCT(mat, node, vn, ltr, events, confl_set): 
+  """Input: the matrix of preconditions, the root of the tree, the list of nodes that 
+     have already been visited, the list of maximal steps (?), the list of events in the net, 
+     the sets of conflicts 
+     Output: tree of maximal-step computations
+  """
   # vn: list of visited nodes in a path 
   for x in vn:
     if np.array_equal(node.mrk, x.mrk) == True:   # Repeated marking
@@ -166,7 +178,10 @@ def genMSCT(mat, node, vn, ltr, events, confl_set):
       genMSCT (mat, newn, cvn, ltr, events, confl_set)
   return
 
-def findPaths(n, x, leaves):
+def findPaths(n, x, leaves = []):
+  """Input: a root node n, a list of transitions, a list of leaves (used in the recursice call, initially empty)
+     Output: list of leaves such that there is at least an element of x in the path bringing to it
+  """
   if n.children == []:
     hasX = False
     i = 0
@@ -180,20 +195,99 @@ def findPaths(n, x, leaves):
     for child in n.children:
       leaves = findPaths(child, x, leaves)
   return leaves
+  
+def elongate_path(n, x, y, root, leaves = []):
+  if n.children == []:
+    hasX = False
+    ancestor = n.isomrk
+    trace = np.zeros(len(n.trace), np.uint8)
+    for i in x:
+      trace[i] = trace[i] + n.trace[i] - root.trace[i]
+    for i in y:
+      trace[i] = trace[i] + n.trace[i] - root.trace[i]
+    nchild = Nodo(n.mrk, trace)
+    nchild.isomrk = ancestor
+    if n.dead == 1:
+      nchild.dead = 1
+    else:
+      nchild.dead = 0
+    if nchild.dead == 0 and np.all(ancestor.trace >= root.trace) and np.any(ancestor.trace != root.trace):      
+      leaves.append(nchild)
+    else:
+      i = 0
+      while i < len(x) and hasX == False:
+        if n.trace[x[i]] - root.trace[x[i]] > 0:
+          leaves.append(nchild)
+          hasX = True
+        else:
+          i = i + 1
+  else:
+    for child in n.children:
+      leaves = elongate_path(child, x, y, root, leaves)
+  return leaves
+  
+def evaluate_path(path, y):
+  j = 0
+  rev = False
+  while j < len(y) and rev == False:
+    if path[y[j]] > 0: 
+      return True
+    else:
+      j = j + 1
+  return False
+  
+def update_paths(paths, x, y):
+  new_leaves = []
+  for node in paths:
+    if node.dead == 0:
+      ancestor = node.isomrk
+      leaves = elongate_path(ancestor, x, y, ancestor)
+      for leaf in leaves:
+        leaf.trace = leaf.trace + node.trace
+      new_leaves.extend(leaves)
+  return new_leaves
+  
+def collective_reveals(leaves, x, y, n):
+  empty = True       
+  while leaves != []:
+    cl = leaves.copy()
+    for leaf in cl:
+      m = 0
+      for i in x:
+        m = m + leaf.trace[i]
+      if m >= n:
+        empty = False
+        b = evaluate_path(leaf.trace, y)
+        if b == False:
+          return 1
+        leaves.remove(leaf)    
+    leaves = update_paths(leaves, x, y)
+  if empty == True:
+    return 2
+  else:
+    return 0
+        
 
 #input_m = np.array(([1,1,0,0,0,0,0],[0,0,1,1,0,0,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,1]))  
-input_m = np.array(([0,0,0,0,0,0],[1,0,0,0,0,0],[0,1,1,0,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]))
-output_m = np.array(([0,0,0,0,1,0], [0,0,0,1,0,0], [0,0,0,1,0,0], [1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,1],[0,0,1,0,0,0]))
-marking = np.array([0,1,1,0,0,0,0])
-net = PTnet(input_m, output_m, marking)
-marking2 = np.array([2,0,0,1,0,0,0])
-test = conflict_partition(input_m)
-eventi = net.eventList()
+#input_m = np.array(([0,0,0,0,0,0],[1,0,0,0,0,0],[0,1,1,0,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]))
+#output_m = np.array(([0,0,0,0,1,0], [0,0,0,1,0,0], [0,0,0,1,0,0], [1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,1],[0,0,1,0,0,0]))
+#marking = np.array([0,1,1,0,0,0,0])
+#net = PTnet(input_m, output_m, marking)
+#marking2 = np.array([2,0,0,1,0,0,0])
+#test = conflict_partition(input_m)
+#eventi = net.eventList()
 #ms = compute_maximal_steps(input_m, marking, test)
 #print(ms)
 #print(ms[0][0])
 
-m = [0,1,1,0,0,0,0]
+#m = [0,1,1,0,0,0,0]
+
+inPNSE = np.array(([1,0,1,0,0,0,0,0], [0,1,0,0,1,0,0,0],[0,0,0,1,0,0,0,0], [0,0,0,0,0,0,0,1], [0,0,0,0,0,1,1,0],[0,0,0,0,0,1,1,0],[0,0,0,0,0,0,0,0]))
+outPNSE = np.array(([0,1,0,0,0,0,0,0], [1,0,0,1,0,0,0,0],[0,0,1,0,0,0,0,0], [0,0,0,0,1,0,1,0], [0,0,0,0,1,0,0,1],[0,0,0,0,0,0,0,1],[0,0,0,0,0,1,0,0]))
+m = np.array(([1,0,0,0,0,2,0]))
+net = PTnet(inPNSE,outPNSE,m)
+test = conflict_partition(net.prem)
+eventi = net.eventList()
 
 #a=Event('a',[0,1,0,0,0,0,0],[0,0,0,1,0,0,0])
 #b=Event('b',[0,0,1,0,0,0,0],[0,0,0,0,1,0,0])
@@ -203,10 +297,15 @@ m = [0,1,1,0,0,0,0]
 #f=Event('f',[0,0,0,0,0,0,1],[0,0,0,0,0,1,0])
 #eventi = [a,b,c,d,e,f]
 trace = np.zeros(len(eventi), np.uint8)
-n = Nodo(marking, trace)
-enab = listenabled(m, eventi)
+n = Nodo(net.m0, trace)
+#enab = listenabled(m, eventi)
 vn = []
 genMSCT(net.prem, n, vn, [], eventi, test)
 n.printsubtree(0)
-leaves = findPaths(n, [3,4], [])
-print(leaves)
+x = [0,2]
+y = [1]
+leaves = findPaths(n, x)
+for l in leaves:
+  print("ancestor", l.isomrk)
+ans = collective_reveals(leaves, x, y, 2)
+print(ans)

@@ -1,12 +1,6 @@
 import numpy as np
 import itertools
 
-inPNSE = np.array(([1,0,1,0,0,0,0,0], [0,1,0,0,1,0,0,0],[0,0,0,1,0,0,0,0], [0,0,0,0,0,0,0,1], [0,0,0,0,0,1,1,0],[0,0,0,0,0,1,1,0],[0,0,0,0,0,0,0,0]))
-outPNSE = np.array(([0,1,0,0,0,0,0,0], [1,0,0,1,0,0,0,0],[0,0,1,0,0,0,0,0], [0,0,0,0,1,0,1,0], [0,0,0,0,1,0,0,1],[0,0,0,0,0,0,0,1],[0,0,0,0,0,1,0,0]))
-m = np.array(([1,0,0,0,0,2,0]))
-x = [0,2]
-y = [1]
-
 class PTnet:
   def __init__(self, prem, postm, m0):
     self.prem = prem
@@ -131,6 +125,13 @@ def compute_maximal_steps(m1, marking, confl):
   ms = maxstep2list(maxsteps, m1.shape[1])
   return ms
 
+# Function nextmrk: compute new marking when step s fires at m
+def nextmrk (m, s):
+  nm = m.copy()
+  for i in range(len(m)):
+    nm[i] = m[i] - s.pre[i] + s.post[i]
+  return nm
+
 def nextmrk_step(m, step, events):
   """Input: the current marking, a step of transitions and the list of events of the net
      Output: the marking obtained from the current marking after the execution of the step
@@ -143,6 +144,12 @@ def nextmrk_step(m, step, events):
   new_m = m - inpu + outpu
   return new_m
 
+def listenabled(m, events):
+  lse = []
+  for t in events:
+    if t.enabled(m):
+      lse.append(t)
+  return lse
 
 def genMSCT(mat, node, vn, ltr, events, confl_set): 
   """Input: the matrix of preconditions, the root of the tree, the list of nodes that 
@@ -155,6 +162,7 @@ def genMSCT(mat, node, vn, ltr, events, confl_set):
     if np.array_equal(node.mrk, x.mrk) == True:   # Repeated marking
       node.isomrk = x
       return
+#    ltr = listenabled(node.mrk, events)
   ltr = compute_maximal_steps(mat, node.mrk, confl_set)
   cltr = ltr.copy()
   if len(ltr) == 0:    # Deadlock
@@ -189,11 +197,6 @@ def findPaths(n, x, leaves = []):
   return leaves
   
 def elongate_path(n, x, y, root, leaves = []):
-  """Input: node of the tree ordered with respect to root, list of revealing events, 
-     list of revealed events, starting point of the elongations to consider, list of 
-     leaves that have already been added
-     Output: list of nodes that should be analysed next
-  """
   if n.children == []:
     hasX = False
     ancestor = n.isomrk
@@ -224,9 +227,6 @@ def elongate_path(n, x, y, root, leaves = []):
   return leaves
   
 def evaluate_path(path, y):
-  """Input: trace of a node, list of potentially revealed events
-     Output: True, if an element of y is in the trace; False otherwise
-  """
   j = 0
   while j < len(y):
     if path[y[j]] > 0: 
@@ -236,9 +236,6 @@ def evaluate_path(path, y):
   return False
   
 def update_paths(paths, x, y):
-  """Input: list of nodes to extend, list of revealing event, list of revealed events
-     Output: updated list of nodes that can still be useful to examine
-  """
   new_leaves = []
   for node in paths:
     if node.dead == 0:
@@ -250,11 +247,6 @@ def update_paths(paths, x, y):
   return new_leaves
   
 def collective_reveals(leaves, x, y, n):
-  """Input: least of nodes to explore for collective reveals, list of revealing transitions,
-     list of revealed transitions, number of occurrences of x for the collective reveals
-     Output: 0 if n.x collective reveals y, 1 if it does not, 2 if there is no run with 
-     n occurrences of x
-  """
   empty = True       
   while leaves != []:
     cl = leaves.copy()
@@ -274,18 +266,6 @@ def collective_reveals(leaves, x, y, n):
   else:
     return 0
         
-if __name__ == "__main__":
-  net = PTnet(inPNSE,outPNSE,m)
-  test = conflict_partition(net.prem)
-  eventi = net.eventList()
-  trace = np.zeros(len(eventi), np.uint8)
-  n = Nodo(net.m0, trace)
-  genMSCT(net.prem, n, [], [], eventi, test)
-  n.printsubtree(0)
-  leaves = findPaths(n, x)
-  ans = collective_reveals(leaves, x, y, 2)
-  print(ans)
-  
 
 #input_m = np.array(([1,1,0,0,0,0,0],[0,0,1,1,0,0,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,1]))  
 #input_m = np.array(([0,0,0,0,0,0],[1,0,0,0,0,0],[0,1,1,0,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]))
@@ -301,10 +281,12 @@ if __name__ == "__main__":
 
 #m = [0,1,1,0,0,0,0]
 
-
-#net = PTnet(inPNSE,outPNSE,m)
-#test = conflict_partition(net.prem)
-#eventi = net.eventList()
+inPNSE = np.array(([1,0,1,0,0,0,0,0], [0,1,0,0,1,0,0,0],[0,0,0,1,0,0,0,0], [0,0,0,0,0,0,0,1], [0,0,0,0,0,1,1,0],[0,0,0,0,0,1,1,0],[0,0,0,0,0,0,0,0]))
+outPNSE = np.array(([0,1,0,0,0,0,0,0], [1,0,0,1,0,0,0,0],[0,0,1,0,0,0,0,0], [0,0,0,0,1,0,1,0], [0,0,0,0,1,0,0,1],[0,0,0,0,0,0,0,1],[0,0,0,0,0,1,0,0]))
+m = np.array(([1,0,0,0,0,2,0]))
+net = PTnet(inPNSE,outPNSE,m)
+test = conflict_partition(net.prem)
+eventi = net.eventList()
 
 #a=Event('a',[0,1,0,0,0,0,0],[0,0,0,1,0,0,0])
 #b=Event('b',[0,0,1,0,0,0,0],[0,0,0,0,1,0,0])
@@ -313,15 +295,16 @@ if __name__ == "__main__":
 #e=Event('e',[0,0,0,0,0,1,0],[1,0,0,0,0,0,0])
 #f=Event('f',[0,0,0,0,0,0,1],[0,0,0,0,0,1,0])
 #eventi = [a,b,c,d,e,f]
-#trace = np.zeros(len(eventi), np.uint8)
-#n = Nodo(net.m0, trace)
+trace = np.zeros(len(eventi), np.uint8)
+n = Nodo(net.m0, trace)
 #enab = listenabled(m, eventi)
-#vn = []
-#genMSCT(net.prem, n, vn, [], eventi, test)
-#n.printsubtree(0)
-
-#leaves = findPaths(n, x)
-#for l in leaves:
-#  print("ancestor", l.isomrk)
-#ans = collective_reveals(leaves, x, y, 2)
-#print(ans)
+vn = []
+genMSCT(net.prem, n, vn, [], eventi, test)
+n.printsubtree(0)
+x = [0,2]
+y = [1]
+leaves = findPaths(n, x)
+for l in leaves:
+  print("ancestor", l.isomrk)
+ans = collective_reveals(leaves, x, y, 2)
+print(ans)

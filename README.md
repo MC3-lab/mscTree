@@ -11,3 +11,6 @@ It has three possible output values:
 - 0, if n times x collective reveals y
 - 1, if there is at least a maximal run with n occurrences of x and none of y
 - 2, if there is no maximal run with n occurrences of x.
+
+Requirements:
+Python3, numpy, itertools

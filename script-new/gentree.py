@@ -1,92 +1,10 @@
+#!/usr/bin/python3
 import numpy as np
 import itertools
+import sys
+import getopt
+from PTnet import *
 
-inPNSE = np.array(([1,0,1,0,0,0,0,0], [0,1,0,0,1,0,0,0],[0,0,0,1,0,0,0,0], [0,0,0,0,0,0,0,1], [0,0,0,0,0,1,1,0],[0,0,0,0,0,1,1,0],[0,0,0,0,0,0,0,0]))
-outPNSE = np.array(([0,1,0,0,0,0,0,0], [1,0,0,1,0,0,0,0],[0,0,1,0,0,0,0,0], [0,0,0,0,1,0,1,0], [0,0,0,0,1,0,0,1],[0,0,0,0,0,0,0,1],[0,0,0,0,0,1,0,0]))
-m = np.array(([1,0,0,0,0,2,0]))
-x = [0,2]
-y = [1]
-
-class PTnet:
-  def __init__(self, prem, postm, m0):
-    self.prem = prem
-    self.postm = postm
-    self.m0 = m0
-    
-  def eventList(self):
-    events = []
-    for i in range(0, self.prem.shape[1]):
-      pre = self.prem[:,i]
-      post = self.postm[:,i]
-      ev = Event(pre, post)
-      events.append(ev)
-    return events
-
-# Class Event: transition of a PT nets; self-loops allowed
-class Event:
-    def __init__ (self, pre, post, lab = 'a') :
-        self.lab = lab
-        self.pre = pre
-        self.post = post
-        
-    def enabled (self, marking) :
-        i = 0
-        flag = 1
-        while i < len(marking) and flag:
-            if marking[i] < self.pre[i]:
-                flag = 0
-            i = i + 1
-        return flag
-
-# Class Nodo: a node in the max step tree of a free-choice net
-class Nodo:
-  def __init__(self, marking, trace):
-    self.mrk      = marking
-    self.children = []
-    self.isomrk   = None  # Ancestor with same marking
-    self.trace    = trace
-    self.dead     = 0  # 1: is a deadlock
-
-  def printsubtree (self, level):
-    i = 0
-    while i < level:
-        print ("    ", end='')
-        i = i+1
-#
-    print(self.mrk, "  ", self.dead, "  ", self.trace)     
-    for c in self.children:
-      c.printsubtree(level+1)
-  
-  def __repr__(self):
-      return str(self.mrk) + " " + str(self.trace) + "  " + str(self.dead)
-      
-def conflict_set(pre):
-  """Input: a row of the incidence matrix with preconditions
-     Output: a set with all the transitions having the row precondition as input
-  """
-  confl = set([])
-  for i in range (0, pre.shape[0]):
-    if pre[i] != 0:
-      confl.add(i)
-  return confl
-
-def conflict_partition(m1):
-  """Input: incidence matrix with preconditions
-     Output: list of sets, where each set is a clique of conflict relation
-     Since the net is equal-conflict, the sets form a partition of transitions.
-  """
-  m1_rows, m1_col = m1.shape
-  added = set([])
-  cp = []
-  for t in range (0, m1_col):  
-    if t not in added:
-      i = 0
-      while m1[i][t] == 0 :
-        i = i + 1
-      t_confl = conflict_set(m1[i])
-      added = added.union(t_confl)
-      cp.append(t_confl)
-  return cp
 
 def find_cardinality(t, col_t, marking):
   """Input: a transition t, the column with the preset of t and a marking
@@ -98,7 +16,7 @@ def find_cardinality(t, col_t, marking):
     r = r - col_t
     i = i + 1
   return i
-  
+    
 def maxstep2list(maxsteps,numt):
   """Input: the list of maximal steps as tuples of tuples and the number of transitions in the net
      Output: the list of maximal steps as a numpy array where in each position there is the number of 
@@ -113,9 +31,9 @@ def maxstep2list(maxsteps,numt):
           lstep[i] += 1
       list_steps.append(lstep)
   return list_steps
-        
-  
-def compute_maximal_steps(m1, marking, confl):
+          
+    
+def compute_maximal_steps(prem, marking, confl):
   """Input: incidence matrix with preconditions, a marking, the events partitioned in conflicts
      Output: the maximal steps enabled in the marking
   """
@@ -123,26 +41,25 @@ def compute_maximal_steps(m1, marking, confl):
   for c in confl:
     t = c.pop()
     c.add(t)
-    n = find_cardinality(t, m1[:,t], marking)
+    n = find_cardinality(t, prem[:,t], marking)
     if n > 0:
       step_part = list(itertools.combinations_with_replacement(c, n))
       steps.append(step_part)
   maxsteps = list(itertools.product(*steps))
-  ms = maxstep2list(maxsteps, m1.shape[1])
+  ms = maxstep2list(maxsteps, prem.shape[1])
   return ms
 
 def nextmrk_step(m, step, events):
-  """Input: the current marking, a step of transitions and the list of events of the net
-     Output: the marking obtained from the current marking after the execution of the step
-  """
-  inpu = np.zeros(len(m), np.uint8)
-  outpu = np.zeros(len(m), np.uint8)
-  for i in range(0, len(step)):
-    inpu = inpu + step[i] * events[i].pre
-    outpu = outpu + step[i] * events[i].post
-  new_m = m - inpu + outpu
-  return new_m
-
+    """Input: the current marking, a step of transitions and the list of events of the net
+       Output: the marking obtained from the current marking after the execution of the step
+    """
+    inpu = np.zeros(len(m), np.uint8)
+    outpu = np.zeros(len(m), np.uint8)
+    for i in range(0, len(step)):
+      inpu = inpu + step[i] * events[i].pre
+      outpu = outpu + step[i] * events[i].post
+    new_m = m - inpu + outpu
+    return new_m
 
 def genMSCT(mat, node, vn, ltr, events, confl_set): 
   """Input: the matrix of preconditions, the root of the tree, the list of nodes that 
@@ -273,55 +190,77 @@ def collective_reveals(leaves, x, y, n):
     return 2
   else:
     return 0
+ 
+    
+def help():
+  print("--- Usage ---")
+  print("The script needs two arguments:")
+  print("1. The name of the file with the net; it can be a ndr file")
+  print("  exported from Tina or a txt file where the net is already")
+  print("  specified by its two incidence matrices and its initial") 
+  print("  marking. In the first case, please use option -n, otherwise,")
+  print("  use option -t")
+  print("2. The collective reveals relation; it can be given in the")
+  print("  command line or in a txt file. In the latter case, please")
+  print("  use option -f.")
         
 if __name__ == "__main__":
-  net = PTnet(inPNSE,outPNSE,m)
-  test = conflict_partition(net.prem)
-  eventi = net.eventList()
-  trace = np.zeros(len(eventi), np.uint8)
-  n = Nodo(net.m0, trace)
-  genMSCT(net.prem, n, [], [], eventi, test)
-  n.printsubtree(0)
-  leaves = findPaths(n, x)
-  ans = collective_reveals(leaves, x, y, 2)
-  print(ans)
-  
-
-#input_m = np.array(([1,1,0,0,0,0,0],[0,0,1,1,0,0,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,1,0,0],[0,0,0,0,0,1,0],[0,0,0,0,0,0,1]))  
-#input_m = np.array(([0,0,0,0,0,0],[1,0,0,0,0,0],[0,1,1,0,0,0],[0,0,0,1,0,0],[0,0,0,1,0,0],[0,0,0,0,1,0],[0,0,0,0,0,1]))
-#output_m = np.array(([0,0,0,0,1,0], [0,0,0,1,0,0], [0,0,0,1,0,0], [1,0,0,0,0,0],[0,1,0,0,0,0],[0,0,1,0,0,1],[0,0,1,0,0,0]))
-#marking = np.array([0,1,1,0,0,0,0])
-#net = PTnet(input_m, output_m, marking)
-#marking2 = np.array([2,0,0,1,0,0,0])
-#test = conflict_partition(input_m)
-#eventi = net.eventList()
-#ms = compute_maximal_steps(input_m, marking, test)
-#print(ms)
-#print(ms[0][0])
-
-#m = [0,1,1,0,0,0,0]
-
-
-#net = PTnet(inPNSE,outPNSE,m)
-#test = conflict_partition(net.prem)
-#eventi = net.eventList()
-
-#a=Event('a',[0,1,0,0,0,0,0],[0,0,0,1,0,0,0])
-#b=Event('b',[0,0,1,0,0,0,0],[0,0,0,0,1,0,0])
-#c=Event('c',[0,0,1,0,0,0,0],[0,0,0,0,0,1,1])
-#d=Event('d',[0,0,0,1,1,0,0],[0,1,1,0,0,0,0])
-#e=Event('e',[0,0,0,0,0,1,0],[1,0,0,0,0,0,0])
-#f=Event('f',[0,0,0,0,0,0,1],[0,0,0,0,0,1,0])
-#eventi = [a,b,c,d,e,f]
-#trace = np.zeros(len(eventi), np.uint8)
-#n = Nodo(net.m0, trace)
-#enab = listenabled(m, eventi)
-#vn = []
-#genMSCT(net.prem, n, vn, [], eventi, test)
-#n.printsubtree(0)
-
-#leaves = findPaths(n, x)
-#for l in leaves:
-#  print("ancestor", l.isomrk)
-#ans = collective_reveals(leaves, x, y, 2)
-#print(ans)
+  try:
+    opts, args = getopt.getopt(sys.argv[1:], "n:t:f:")
+  except getopt.GetoptError:    
+    help()
+    sys.exit()
+  if len(opts) == 0:
+    print("Use -t if the net is in a txt file, -n otherwise")
+    sys.exit()
+  elif len(opts) > 2 or len(args) > 1 or (len(opts) + len(args) != 2) :
+    help()
+    sys.exit()  
+  elif opts[0][0] == "-n":
+    print("Sorry, this option is not implemented yet :(") 
+    sys.exit()
+  else: 
+    f = open(opts[0][1])    
+    data = ""
+    for line in f:
+        data += line
+    f.close()
+    try:
+        net = eval(data) 
+    except (SyntaxError, NameError):
+      stderr.write("%s: syntax error" % argv[0])
+      if form != stdin:
+        stderr.write(" in %s" % argv[2])
+      stderr.write("\n")
+      exit()
+    if len(opts) == 2:
+      f = open(opts[1][1])    
+      data = ""
+      for line in f:
+        data += line
+      f.close()
+      try:
+        rev = eval(data) 
+      except (SyntaxError, NameError):
+        stderr.write("%s: syntax error" % argv[0])
+        exit() 
+    else:
+      rev = eval(args[0])     
+#    net = PTnet(inPNSE,outPNSE,m)
+    test = net.conflict_partition()
+    eventi = net.eventList()
+    trace = np.zeros(len(eventi), np.uint8)
+    n = Nodo(net.m0, trace)
+    genMSCT(net.prem, n, [], [], eventi, test)
+    n.printsubtree(0)
+    x = rev[0]
+    y = rev[1]
+    z = rev[2]
+    leaves = findPaths(n, x)
+    ans = collective_reveals(leaves, x, y, z)
+    if ans == 0:
+      print("The set "+ str(x) + " "+ str(z) + "-collective reveals" + str(y)) 
+    elif ans == 1:
+      print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
+    else:
+      print("There are no run with " + str(z) + "occurrences of" + str(x))  

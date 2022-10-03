@@ -13,4 +13,18 @@ It has three possible output values:
 - 2, if there is no maximal run with n occurrences of x.
 
 Requirements:
-Python3, numpy, itertools
+Python3, numpy, itertools, sys, getopt
+
+Current use:
+Run gentree.py with python3 and specify the net and the collective reveals relation as follows:
+1. The net is in a text file represented as PTnet(<input_incidence_matrix>, <output_incidence_matrix>, <initial_marking>)
+all these 3 elements must be expressed as numpy array (see examples)
+2. The reveals relation can be both in a txt file or in a string directly given on the command line;
+its a triple represented as (<list_revealing_events>, <list_revealed_events>, number_of_occurrences)
+
+On the command line, you can write: python3 gentree.py -t <path_file_PTnet> -f <name_file_reveals>
+or python3 gentree.py -t <name_file_PTnet> "rev_relations"
+
+Example: python3 gentree.py -t examples/net1.txt -f examples/rev1.txt
+or
+python3 gentree.py -t examples/net1.txt "([0,2],[1], 2)"

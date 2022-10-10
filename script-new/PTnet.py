@@ -23,7 +23,7 @@ class PTnet:
       if pre[i] != 0:
         confl.add(i)
     return confl
-
+  
   def conflict_partition(self):
     """Input: incidence matrix with preconditions
        Output: list of sets, where each set is a clique of conflict relation
@@ -41,6 +41,24 @@ class PTnet:
         added = added.union(t_confl)
         cp.append(t_confl)
     return cp
+   
+  def check_free_choice(self):
+    row, col = self.prem.shape
+    tcheck = list(range(0, col))
+    for i in range (0, row):
+      conflict = []
+      for j in tcheck:
+        if self.prem[i][j] > 0:
+          conflict.append(j)
+      if len(conflict) > 1: 
+        test = conflict.pop()
+        for t in conflict:
+          if not all(self.prem[:, test] == self.prem[:, t]):
+            return False
+          tcheck.remove(t)
+        tcheck.remove(test)
+    return True
+     
 
 
 # Class Event: transition of a PT nets; self-loops allowed

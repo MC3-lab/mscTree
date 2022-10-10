@@ -247,20 +247,24 @@ if __name__ == "__main__":
     else:
       rev = eval(args[0])     
 #    net = PTnet(inPNSE,outPNSE,m)
-    test = net.conflict_partition()
-    eventi = net.eventList()
-    trace = np.zeros(len(eventi), np.uint8)
-    n = Nodo(net.m0, trace)
-    genMSCT(net.prem, n, [], [], eventi, test)
-    n.printsubtree(0)
-    x = rev[0]
-    y = rev[1]
-    z = rev[2]
-    leaves = findPaths(n, x)
-    ans = collective_reveals(leaves, x, y, z)
-    if ans == 0:
-      print("The set "+ str(x) + " "+ str(z) + "-collective reveals" + str(y)) 
-    elif ans == 1:
-      print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
+    fc = net.check_free_choice()
+    if fc == False:
+      print("This net is not equal-conflict")
     else:
-      print("There are no run with " + str(z) + "occurrences of" + str(x))  
+      test = net.conflict_partition()
+      eventi = net.eventList()
+      trace = np.zeros(len(eventi), np.uint8)
+      n = Nodo(net.m0, trace)
+      genMSCT(net.prem, n, [], [], eventi, test)
+      n.printsubtree(0)
+      x = rev[0]
+      y = rev[1]
+      z = rev[2]
+      leaves = findPaths(n, x)
+      ans = collective_reveals(leaves, x, y, z)
+      if ans == 0:
+        print("The set "+ str(x) + " "+ str(z) + "-collective reveals" + str(y)) 
+      elif ans == 1:
+        print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
+      else:
+        print("There are no run with " + str(z) + "occurrences of" + str(x))  

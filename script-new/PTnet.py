@@ -24,6 +24,9 @@ class PTnet:
         confl.add(i)
     return confl
   
+  def diff_mrk(self):
+    return self.postm - self.prem
+  
   def conflict_partition(self):
     """Input: incidence matrix with preconditions
        Output: list of sets, where each set is a clique of conflict relation

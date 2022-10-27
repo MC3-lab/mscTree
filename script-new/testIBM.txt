@@ -1,0 +1,46 @@
+v1: IBM319
+-------------------
+Time Consumed: 33.77256488800049 secs
+Time Consumed: 61.731258392333984 secs
+reveals relations:  9547
+non-revealing relations 22137
+
+*********************
+with numba and all reveals
+
+Time Consumed: 14.862842798233032 secs
+Time Consumed: 0.5455806255340576 secs
+reveals relations:  9547
+non-revealing relations 20713
+non 1-live transitions 8
+
+-----------------------------
+v1: IBM703
+-----------------------------
+numba and all reveals
+ 
+Time Consumed: 36.62584614753723 secs
+Time Consumed: 0.5718367099761963 secs
+reveals relations:  8240
+non-revealing relations 72416
+non 1-live transitions 0
+
+--------------------------------
+v1: IBM5964
+--------------------------------
+Time Consumed: 0.5188488960266113 secs
+Time Consumed: 0.481489896774292 secs
+reveals relations:  435
+non-revealing relations 3040
+non 1-live transitions 114
+
+
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0]
+

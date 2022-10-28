@@ -3,10 +3,13 @@ import numpy as np
 import itertools
 import sys
 import getopt
+import time
+from numba import njit, prange
+import cProfile
 from PTnet import *
-from dotparse import *
+from pnml2mat import *
 
-#Generate max step tree from a dot file
+numNodi = 0
 
 def find_cardinality(t, col_t, marking):
   """Input: a transition t, the column with the preset of t and a marking
@@ -51,19 +54,15 @@ def compute_maximal_steps(prem, marking, confl):
   ms = maxstep2list(maxsteps, prem.shape[1])
   return ms
 
-def nextmrk_step(m, step, events):
+def nextmrk_step(m, step, dstep):
     """Input: the current marking, a step of transitions and the list of events of the net
        Output: the marking obtained from the current marking after the execution of the step
     """
-    inpu = np.zeros(len(m), np.uint8)
-    outpu = np.zeros(len(m), np.uint8)
-    for i in range(0, len(step)):
-      inpu = inpu + step[i] * events[i].pre
-      outpu = outpu + step[i] * events[i].post
-    new_m = m - inpu + outpu
+    change = np.dot(dstep, step)
+    new_m = m + change
     return new_m
 
-def genMSCT(mat, node, vn, ltr, events, confl_set): 
+def genMSCT(mat, node, vn, ltr, confl_set, dstep): 
   """Input: the matrix of preconditions, the root of the tree, the list of nodes that 
      have already been visited, the list of maximal steps (?), the list of events in the net, 
      the sets of conflicts 
@@ -83,10 +82,13 @@ def genMSCT(mat, node, vn, ltr, events, confl_set):
     for step in cltr:
       vn.append(node)
       cvn = vn.copy()
-      nm = nextmrk_step (node.mrk, step, events)
+      nm = nextmrk_step (node.mrk, step, dstep)
       newn = Nodo (nm, node.trace + step)
+      global numNodi
+      numNodi += 1
+      numNodi += 1
       node.children.append(newn)
-      genMSCT (mat, newn, cvn, ltr, events, confl_set)
+      genMSCT (mat, newn, cvn, ltr, confl_set, dstep)
   return
 
 def findPaths(n, x, leaves = []):
@@ -107,7 +109,7 @@ def findPaths(n, x, leaves = []):
       leaves = findPaths(child, x, leaves)
   return leaves
   
-def elongate_path(n, x, y, root, leaves = []):
+def elongate_path(n, x, y, root, cleaves = []):
   """Input: node of the tree ordered with respect to root, list of revealing events, 
      list of revealed events, starting point of the elongations to consider, list of 
      leaves that have already been added
@@ -128,19 +130,19 @@ def elongate_path(n, x, y, root, leaves = []):
     else:
       nchild.dead = 0
     if nchild.dead == 0 and np.all(ancestor.trace >= root.trace) and np.any(ancestor.trace != root.trace):      
-      leaves.append(nchild)
+      cleaves.append(nchild)
     else:
       i = 0
       while i < len(x) and hasX == False:
         if n.trace[x[i]] - root.trace[x[i]] > 0:
-          leaves.append(nchild)
+          cleaves.append(nchild)
           hasX = True
         else:
           i = i + 1
   else:
     for child in n.children:
-      leaves = elongate_path(child, x, y, root, leaves)
-  return leaves
+      cleaves = elongate_path(child, x, y, root, cleaves)
+  return cleaves
   
 def evaluate_path(path, y):
   """Input: trace of a node, list of potentially revealed events
@@ -162,10 +164,10 @@ def update_paths(paths, x, y):
   for node in paths:
     if node.dead == 0:
       ancestor = node.isomrk
-      leaves = elongate_path(ancestor, x, y, ancestor)
-      for leaf in leaves:
+      cleaves = elongate_path(ancestor, x, y, ancestor)
+      for leaf in cleaves:
         leaf.trace = leaf.trace + node.trace
-      new_leaves.extend(leaves)
+      new_leaves.extend(cleaves)
   return new_leaves
   
 def collective_reveals(leaves, x, y, n):
@@ -174,9 +176,10 @@ def collective_reveals(leaves, x, y, n):
      Output: 0 if n.x collective reveals y, 1 if it does not, 2 if there is no run with 
      n occurrences of x
   """
+  cleaves = leaves.copy()
   empty = True       
-  while leaves != []:
-    cl = leaves.copy()
+  while cleaves != []:
+    cl = cleaves.copy()
     for leaf in cl:
       m = 0
       for i in x:
@@ -186,8 +189,8 @@ def collective_reveals(leaves, x, y, n):
         b = evaluate_path(leaf.trace, y)
         if b == False:
           return 1
-        leaves.remove(leaf)    
-    leaves = update_paths(leaves, x, y)
+        cleaves.remove(leaf) 
+    cleaves = update_paths(cleaves, x, y)
   if empty == True:
     return 2
   else:
@@ -206,13 +209,13 @@ def help():
   print("  command line or in a txt file. In the latter case, please")
   print("  use option -f.")
         
-if __name__ == "__main__":
+def main4tree():
   if len(sys.argv) < 4:
     print("Argument(s) missing")
     exit()
   else:
     f = sys.argv[1]
-    net = inc_mat_from_dot(f)
+    net = pnml2gti()
     a = int(sys.argv[2])
     b = int(sys.argv[3])
     rev = ([a], [b], 1)
@@ -222,9 +225,12 @@ if __name__ == "__main__":
     else:
       test = net.conflict_partition()
       eventi = net.eventList()
-      trace = np.zeros(len(eventi), np.uint8)
+      trace = np.zeros(net.prem.shape[1], np.uint8)
+      dstep = net.diff_mrk()
       n = Nodo(net.m0, trace)
-      genMSCT(net.prem, n, [], [], eventi, test)
+      global numNodi
+      numNodi += 1
+      genMSCT(net.prem, n, [], [], test, dstep)
       n.printsubtree(0)
       x = rev[0]
       y = rev[1]
@@ -237,3 +243,55 @@ if __name__ == "__main__":
         print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
       else:
         print("There are no run with " + str(z) + "occurrences of" + str(x))  
+
+#if __name__ == '__main__':        
+def main():
+  if len(sys.argv) < 1:
+    print("Argument missing")
+    exit()
+  else:
+#    f = sys.argv[1]
+    im, om, m0 = pnml2gti()    
+    net = PTnet(im, om, m0)
+#    a = int(sys.argv[2])
+#    b = int(sys.argv[3])
+#    rev = ([a], [b], 1)
+#    fc = net.check_free_choice()
+#    if fc == False:
+#      print( "    NOPE")
+#    else:
+#      print("   YEP")
+    test = net.conflict_partition()
+    dstep = net.diff_mrk()
+#    eventi = net.eventList()
+    trace = np.zeros(net.prem.shape[1], np.uint8)
+    n = Nodo(net.m0, trace)
+    start = time.time()
+    genMSCT(net.prem, n, [], [], test, dstep)
+    stop = time.time()
+    print("Time Consumed: {} secs".format(stop - start))
+    revealed = 0
+    non_revealed = 0
+    startGlob = time.time()
+    for i in range(net.prem.shape[1]):
+      leaves = findPaths(n, [i], [])
+      for j in range(net.prem.shape[1]):
+        ans = collective_reveals(leaves, [i], [j], 1)  
+        if ans == 0:
+          revealed += 1
+        else:
+          non_revealed += 1
+    stopGlob = time.time()
+    print("Time Consumed: {} secs".format(stopGlob - startGlob))
+    print("reveals relations: ", revealed)
+    print("non-revealing relations", non_revealed)
+#    if ans == 0:
+#      print("The set "+ str(x) + " "+ str(z) + "-collective reveals" + str(y)) 
+#    elif ans == 1:
+#      print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
+#    else:
+#      print("There are no run with " + str(z) + "occurrences of" + str(x))  
+#    print("numNodi: ", numNodi)
+      
+if __name__ == '__main__':
+   cProfile.run('main()')

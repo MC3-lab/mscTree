@@ -3,11 +3,9 @@ import numpy as np
 import itertools
 import sys
 import getopt
-from numba import njit, prange
 from PTnet import *
-from pnml2mat import *
 
-@njit
+
 def find_cardinality(t, col_t, marking):
   """Input: a transition t, the column with the preset of t and a marking
      Output: the number of times in which t can fire in m
@@ -51,15 +49,19 @@ def compute_maximal_steps(prem, marking, confl):
   ms = maxstep2list(maxsteps, prem.shape[1])
   return ms
 
-def nextmrk_step(m, step, dstep):
+def nextmrk_step(m, step, events):
     """Input: the current marking, a step of transitions and the list of events of the net
        Output: the marking obtained from the current marking after the execution of the step
     """
-    change = np.dot(dstep, step)
-    new_m = m + change
+    inpu = np.zeros(len(m), np.uint8)
+    outpu = np.zeros(len(m), np.uint8)
+    for i in range(0, len(step)):
+      inpu = inpu + step[i] * events[i].pre
+      outpu = outpu + step[i] * events[i].post
+    new_m = m - inpu + outpu
     return new_m
 
-def genMSCT(mat, node, vn, ltr, confl_set, dstep, leaves = []): 
+def genMSCT(mat, node, vn, ltr, events, confl_set): 
   """Input: the matrix of preconditions, the root of the tree, the list of nodes that 
      have already been visited, the list of maximal steps (?), the list of events in the net, 
      the sets of conflicts 
@@ -69,37 +71,41 @@ def genMSCT(mat, node, vn, ltr, confl_set, dstep, leaves = []):
   for x in vn:
     if np.array_equal(node.mrk, x.mrk) == True:   # Repeated marking
       node.isomrk = x
-      leaves.append(node)
-      return leaves
+      return
   ltr = compute_maximal_steps(mat, node.mrk, confl_set)
   cltr = ltr.copy()
   if len(ltr) == 0:    # Deadlock
     node.dead = 1
-    leaves.append(node)
-    return leaves
+    return
   else:
     for step in cltr:
       vn.append(node)
       cvn = vn.copy()
-      nm = nextmrk_step (node.mrk, step, dstep)
+      nm = nextmrk_step (node.mrk, step, events)
       newn = Nodo (nm, node.trace + step)
       node.children.append(newn)
-      genMSCT (mat, newn, cvn, ltr, confl_set, dstep, leaves)
-  return leaves
+      genMSCT (mat, newn, cvn, ltr, events, confl_set)
+  return
 
-def comp_leaves(x, leaves):
-  xleaves = []
-  for i in prange(len(leaves)):
-    app = False
-    j = 0
-    while j < len(x) and app == False: 
-      if leaves[i].trace[x[j]] > 0:
-        xleaves.append(leaves[i])
-        app = True
-      j += 1
-  return xleaves
+def findPaths(n, x, leaves = []):
+  """Input: a root node n, a list of transitions, a list of leaves (used in the recursice call, initially empty)
+     Output: list of leaves such that there is at least an element of x in the path bringing to it
+  """
+  if n.children == []:
+    hasX = False
+    i = 0
+    while i < len(x) and hasX == False:
+      if n.trace[x[i]] > 0:
+        leaves.append(n)
+        hasX = True
+      else:
+        i = i + 1
+  else:
+    for child in n.children:
+      leaves = findPaths(child, x, leaves)
+  return leaves
   
-def elongate_path(n, x, y, root, cleaves = []):
+def elongate_path(n, x, y, root, leaves = []):
   """Input: node of the tree ordered with respect to root, list of revealing events, 
      list of revealed events, starting point of the elongations to consider, list of 
      leaves that have already been added
@@ -120,19 +126,19 @@ def elongate_path(n, x, y, root, cleaves = []):
     else:
       nchild.dead = 0
     if nchild.dead == 0 and np.all(ancestor.trace >= root.trace) and np.any(ancestor.trace != root.trace):      
-      cleaves.append(nchild)
+      leaves.append(nchild)
     else:
       i = 0
       while i < len(x) and hasX == False:
         if n.trace[x[i]] - root.trace[x[i]] > 0:
-          cleaves.append(nchild)
+          leaves.append(nchild)
           hasX = True
         else:
           i = i + 1
   else:
     for child in n.children:
-      cleaves = elongate_path(child, x, y, root, cleaves)
-  return cleaves
+      leaves = elongate_path(child, x, y, root, leaves)
+  return leaves
   
 def evaluate_path(path, y):
   """Input: trace of a node, list of potentially revealed events
@@ -154,22 +160,21 @@ def update_paths(paths, x, y):
   for node in paths:
     if node.dead == 0:
       ancestor = node.isomrk
-      cleaves = elongate_path(ancestor, x, y, ancestor)
-      for leaf in cleaves:
+      leaves = elongate_path(ancestor, x, y, ancestor)
+      for leaf in leaves:
         leaf.trace = leaf.trace + node.trace
-      new_leaves.extend(cleaves)
+      new_leaves.extend(leaves)
   return new_leaves
   
-def collective_reveals(ileaves, x, y, n):
+def collective_reveals(leaves, x, y, n):
   """Input: least of nodes to explore for collective reveals, list of revealing transitions,
      list of revealed transitions, number of occurrences of x for the collective reveals
      Output: 0 if n.x collective reveals y, 1 if it does not, 2 if there is no run with 
      n occurrences of x
   """
-  cleaves = ileaves.copy()
   empty = True       
-  while cleaves != []:
-    cl = cleaves.copy()
+  while leaves != []:
+    cl = leaves.copy()
     for leaf in cl:
       m = 0
       for i in x:
@@ -179,57 +184,16 @@ def collective_reveals(ileaves, x, y, n):
         b = evaluate_path(leaf.trace, y)
         if b == False:
           return 1
-        cleaves.remove(leaf) 
-    if cleaves != []:
-      cleaves = update_paths(cleaves, x, y)
+        leaves.remove(leaf)    
+    leaves = update_paths(leaves, x, y)
   if empty == True:
     return 2
   else:
     return 0
-    
-@njit(parallel = True)
-def update_rev(rev, trace, live1):
-  for i in prange(len(trace)):
-    if trace[i] > 0:
-      live1[i] = 1
-      for j in prange(len(trace)):
-        if trace[j] == 0:
-          rev[i][j] = 1 
-  return rev, live1
-  
-def comp_1rev(net, r, leaves, n):
-    x = np.array(r[0])
-    y = np.array(r[1])
-    z = r[2]
-    xleaves = comp_leaves(x, leaves)
-    ans = collective_reveals(xleaves, x, y, z)
-    if ans == 0:
-        print("The set "+ str(x) + " "+ str(z) + "-collective reveals" + str(y)) 
-    elif ans == 1:
-        print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
-    else:
-        print("There are no run with " + str(z) + "occurrences of" + str(x))  
  
- 
-def comp_collRev1(net, rev, leaves, n): 
-  for r in rev:
-    comp_1rev(net, r, leaves, n)  
- 
-def cr_inter_mode(net, leaves, n):
-  while True:
-    cr = input("Collective-reveals relation to check: ") 
-    if cr == "quit()":
-      exit()
-    else:
-      print(cr)
-      cr = eval(cr)
-      comp_1rev(net, cr, leaves, n)
-      
     
 def help():
   print("--- Usage ---")
-  print("NOT UPDATED - see readme in the main directory for the current use")
-  print("---------------")
   print("The script needs two arguments:")
   print("1. The name of the file with the net; it can be a ndr file")
   print("  exported from Tina or a txt file where the net is already")
@@ -242,8 +206,8 @@ def help():
         
 if __name__ == "__main__":
   try:
-    opts, args = getopt.getopt(sys.argv[1:], "p:t:f:i:")
-  except getopt.GetoptError:  
+    opts, args = getopt.getopt(sys.argv[1:], "n:t:f:")
+  except getopt.GetoptError:    
     help()
     sys.exit()
   if len(opts) == 0:
@@ -252,9 +216,9 @@ if __name__ == "__main__":
   elif len(opts) > 2 or len(args) > 1 or (len(opts) + len(args) != 2) :
     help()
     sys.exit()  
-  elif opts[0][0] == "-p":
-    im, om, m0 = pnml2gti(opts[0][1])    
-    net = PTnet(im, om, m0)
+  elif opts[0][0] == "-n":
+    print("Sorry, this option is not implemented yet :(") 
+    sys.exit()
   else: 
     f = open(opts[0][1])    
     data = ""
@@ -269,34 +233,38 @@ if __name__ == "__main__":
         stderr.write(" in %s" % argv[2])
       stderr.write("\n")
       exit()
-#    net = PTnet(inPNSE,outPNSE,m)
-  fc = net.check_free_choice()
-  if fc == False:
-      print("This net is not equal-conflict")
-      exit()
-  else:
-      test = net.conflict_partition()
-      dstep = net.diff_mrk()
-      trace = np.zeros(net.prem.shape[1], np.uint8)
-      n = Nodo(net.m0, trace)
-      leaves = genMSCT(net.prem, n, [], [], test, dstep)
-      
-  if len(opts) != 2:
-      rev = [eval(args[0])] 
-      comp_collRev1(net, rev, leaves, n)   
-  elif opts[1][0] == "-f":
+    if len(opts) == 2:
       f = open(opts[1][1])    
       data = ""
       for line in f:
         data += line
       f.close()
       try:
-        rev = [eval(data)] 
-        comp_collRev1(net, rev, leaves, n)
+        rev = eval(data) 
       except (SyntaxError, NameError):
         stderr.write("%s: syntax error" % argv[0])
-        exit()  
-  else:
-      cr_inter_mode(net, leaves, n)  
-        
-
+        exit() 
+    else:
+      rev = eval(args[0])     
+#    net = PTnet(inPNSE,outPNSE,m)
+    fc = net.check_free_choice()
+    if fc == False:
+      print("This net is not equal-conflict")
+    else:
+      test = net.conflict_partition()
+      eventi = net.eventList()
+      trace = np.zeros(len(eventi), np.uint8)
+      n = Nodo(net.m0, trace)
+      genMSCT(net.prem, n, [], [], eventi, test)
+      n.printsubtree(0)
+      x = rev[0]
+      y = rev[1]
+      z = rev[2]
+      leaves = findPaths(n, x)
+      ans = collective_reveals(leaves, x, y, z)
+      if ans == 0:
+        print("The set "+ str(x) + " "+ str(z) + "-collective reveals" + str(y)) 
+      elif ans == 1:
+        print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
+      else:
+        print("There are no run with " + str(z) + "occurrences of" + str(x))  

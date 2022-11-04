@@ -3,9 +3,57 @@ import numpy as np
 import itertools
 import sys
 import getopt
+import xml.etree.ElementTree as ET
 from numba import njit, prange
 from PTnet import *
-from pnml2mat import *
+
+np.set_printoptions(threshold=sys.maxsize)
+
+def pnml2gti(fileName, dpl, dtr):
+  ns = {'pnml': 'http://www.pnml.org/version-2009/grammar/pnml'}
+
+  tree = ET.parse(fileName)
+  root = tree.getroot()
+  inm = []
+
+  i = 0
+  places = tree.findall(".//{http://www.pnml.org/version-2009/grammar/pnml}place")
+  for p in places:
+      dpl[p.attrib['id']] = i
+      if p.find('pnml:initialMarking', ns) is not None:
+          marked = p.find('pnml:initialMarking', ns)
+          inm.append(int(marked.find('pnml:text', ns).text))
+      else:
+          inm.append(0)
+      i += 1
+
+  inm = np.array(inm)
+
+  transitions = tree.findall(".//{http://www.pnml.org/version-2009/grammar/pnml}transition")
+  j = 0    
+  for t in transitions:
+      dtr[t.attrib['id']] = j
+      j += 1    
+
+  imat = np.zeros((i,j), dtype=int)
+  omat = np.zeros((i,j), dtype=int) 
+
+  arcs = root.findall(".//{http://www.pnml.org/version-2009/grammar/pnml}arc")
+  for arc in arcs:
+      isweighted = arc.findall("./{http://www.pnml.org/version-2009/grammar/pnml}inscription")
+      if isweighted:
+          weight = int(arc[0][0].text)
+      else:
+          weight = 1
+
+      if arc.attrib['source'] in dpl.keys():
+          # source is a place
+          imat[dpl[arc.attrib['source']]][dtr[arc.attrib['target']]] = weight
+      else:
+          # source is a transition
+          omat[dpl[arc.attrib['target']]][dtr[arc.attrib['source']]] = weight
+
+  return imat, omat, inm
 
 @njit
 def find_cardinality(t, col_t, marking):
@@ -204,14 +252,25 @@ def comp_1rev(net, r, leaves, n):
     xleaves = comp_leaves(x, leaves)
     ans = collective_reveals(xleaves, x, y, z)
     if ans == 0:
-        print("The set "+ str(x) + " "+ str(z) + "-collective reveals" + str(y)) 
+        print("The set "+ str(x) + " "+ str(z) + "-collective reveals " + str(y)) 
     elif ans == 1:
-        print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals" + str(y)) 
+        print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals " + str(y)) 
     else:
-        print("There are no run with " + str(z) + "occurrences of" + str(x))  
+        print("There are no run with " + str(z) + " occurrences of " + str(x))  
  
  
-def comp_collRev1(net, rev, leaves, n): 
+def comp_collRev1(net, rev, leaves, n, dtr = {}): 
+  if dtr != {}:
+    nrev = []
+    for r in rev:
+      nrev0 = []
+      nrev1 = []
+      for t in r[0]:
+        nrev0.append(dtr[t])
+      for t in r[1]:
+        nrev1.append(dtr[t])
+      nrev.append((nrev0, nrev1, r[2])) 
+    rev = nrev
   for r in rev:
     comp_1rev(net, r, leaves, n)  
  
@@ -224,8 +283,17 @@ def cr_inter_mode(net, leaves, n):
       print(cr)
       cr = eval(cr)
       comp_1rev(net, cr, leaves, n)
-      
-    
+
+@njit(parallel = True)
+def update_rev(rev, trace, live1):
+  for i in prange(len(trace)):
+    if trace[i] > 0:
+      live1[i] = 1
+      for j in prange(len(trace)):
+        if trace[j] == 0:
+          rev[i][j] = 1 
+  return rev, live1
+          
 def help():
   print("--- Usage ---")
         
@@ -233,8 +301,10 @@ if __name__ == "__main__":
   fn = None
   ft = None
   fr = None
+  interactive = False
+  al = False
   try:
-    opts, args = getopt.getopt(sys.argv[1:], "p:t:f:i")
+    opts, args = getopt.getopt(sys.argv[1:], "p:t:f:ia")
   except getopt.GetoptError as e:
     print(e)
     sys.exit(2)
@@ -246,35 +316,42 @@ if __name__ == "__main__":
     elif o == "-f":
       fr = a
     elif o == "-i":
-      print("Ciao")
-
+      interactive = True
+    elif o == "-a":
+      al = True
+      
   if fn: # Input from PNML file
     dpl = {}
     dtr = {}
     im, om, m0 = pnml2gti(fn,dpl,dtr)    
     net = PTnet(im, om, m0)
   elif ft: 
-    data = ""
-    for line in ft:
+    with open(ft, 'r') as f:
+      data = ""
+      for line in f:
         data += line
-    ft.close()
-    try:
+      try:
         net = eval(data) 
-    except (SyntaxError, NameError):
-      stderr.write("%s: syntax error" % argv[0])
-      if form != stdin:
-        stderr.write(" in %s" % argv[2])
-      stderr.write("\n")
-      sys.exit(2)
+      except (SyntaxError, NameError):
+        stderr.write("%s: syntax error" % argv[0])
+        if form != stdin:
+          stderr.write(" in %s" % argv[2])
+          stderr.write("\n")
+          sys.exit(2)
   else:
-    print("Either use -p or -t to specify a PT net")
-    sys.exit(2)
-
+      print("Either use -p or -t to specify a PT net")
+      sys.exit(2)
+  if not(args or fr or interactive or al):
+      print("Please, either specify a collective reveals relation to verify,")
+      print("or use -i for the interactive mode, or -a to compute all the")
+      print("reveals relations")
+      
   fc = net.check_free_choice()
   if fc == False:
       print("This net is not equal-conflict")
       sys.exit(2)
   else:
+      print("I am computing the tree...")
       test = net.conflict_partition()
       dstep = net.diff_mrk()
       trace = np.zeros(net.prem.shape[1], np.uint8)
@@ -283,19 +360,33 @@ if __name__ == "__main__":
       
   if args:
       rev = [eval(args[0])] 
-      comp_collRev1(net, rev, leaves, n)   
+      if fn:
+          comp_collRev1(net, rev, leaves, n, dtr)  
+      else:
+          comp_collRev1(net, rev, leaves, n)  
   elif fr:
-      data = ""
-      for line in fr:
-        data += line
-      fr.close()
+    with open(fr, 'r') as f:
+      rev = []
+      for line in f:
+        rev.append(eval(line))
       try:
-        rev = [eval(data)] 
-        comp_collRev1(net, rev, leaves, n)
+#        rev = [eval(data)] 
+        if fn:   #net in pnml
+            comp_collRev1(net, rev, leaves, n, dtr)
+        else:
+            comp_collRev1(net, rev, leaves, n)  
       except (SyntaxError, NameError):
         stderr.write("%s: syntax error" % argv[0])
         sys.exit(2)  
-  else:
+  elif interactive == True:
       cr_inter_mode(net, leaves, n)  
-        
-
+  elif al == True:
+      nTr = net.prem.shape[1]
+      rev = np.zeros([nTr,nTr], np.uint8)
+      live1 = np.zeros(nTr, np.uint8)
+      for leaf in leaves:
+         rev, live1 = update_rev(rev, leaf.trace, live1)
+      print(rev)
+      print(live1)  
+      if fn:
+         print(dtr)     

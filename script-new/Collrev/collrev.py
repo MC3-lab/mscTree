@@ -4,6 +4,7 @@ import itertools
 import sys
 import getopt
 import xml.etree.ElementTree as ET
+import time
 from numba import njit, prange
 from PTnet import *
 from Nodo import *
@@ -387,7 +388,10 @@ if __name__ == "__main__":
           qr = pnml2nf(qr, dtr) 
       else:  # interactive execution or all reveals execution
         qr = ([], [], 1)
+      start = time.time()
       adj = redmsmg(net, qr[1])
+      end = time.time()
+      print("Time for the marking graph: " + str(end - start))
       trace = np.zeros(net.prem.shape[1], np.uint8)
       n = Nodo(net.m0, trace)
       leaves = genTree(adj, n, [], [])

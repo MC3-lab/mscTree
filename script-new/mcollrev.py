@@ -4,12 +4,9 @@ import itertools
 import sys
 import getopt
 import xml.etree.ElementTree as ET
-import time
 from numba import njit, prange
 from PTnet import *
-from Nodo import *
 
-# Needed to print the matrix of reveals relations with option -a
 np.set_printoptions(threshold=sys.maxsize)
 
 def pnml2gti(fileName, dpl, dtr):
@@ -57,21 +54,6 @@ def pnml2gti(fileName, dpl, dtr):
           omat[dpl[arc.attrib['target']]][dtr[arc.attrib['source']]] = weight
 
   return imat, omat, inm
-  
-def pnml2nf(pf, dtr):
-  qrn = ([], [], pf[2])
-
-  for t in pf[0]:
-    qrn[0].append(dtr[t])
-  for t in pf[1]:
-    qrn[1].append(dtr[t])
-  return qrn
-
-def rmv(l, m):
-  for nxt in l:
-    if nxt[1] == m:
-      l.remove(nxt)
-  return l
 
 @njit
 def find_cardinality(t, col_t, marking):
@@ -98,7 +80,8 @@ def maxstep2list(maxsteps,numt):
         for i in part:
           lstep[i] += 1
       list_steps.append(lstep)
-  return list_steps        
+  return list_steps
+          
     
 def compute_maximal_steps(prem, marking, confl):
   """Input: incidence matrix with preconditions, a marking, the events partitioned in conflicts
@@ -115,7 +98,7 @@ def compute_maximal_steps(prem, marking, confl):
   maxsteps = list(itertools.product(*steps))
   ms = maxstep2list(maxsteps, prem.shape[1])
   return ms
-  
+
 def nextmrk_step(m, step, dstep):
     """Input: the current marking, a step of transitions and the list of events of the net
        Output: the marking obtained from the current marking after the execution of the step
@@ -123,99 +106,34 @@ def nextmrk_step(m, step, dstep):
     change = np.dot(dstep, step)
     new_m = m + change
     return new_m
-  
-def update_mg(adj, invAdj, bd):
-  if bd == []:
-    return adj
-  new_bad = []
-  for m in bd:
-    pb = invAdj[m]
-    for prec in pb:
-      adj[prec] = rmv(adj[prec], m)
-      if adj[prec] == []:
-        new_bad.append(prec)
-        adj.pop(prec)
-  adj = update_mg(adj, invAdj, new_bad) 
-  return adj
-  
-def redmsmg (net, revd):
-  pmarks  = []                    # List of processed markings
-  pending = set()                 # Set of pending markings
-  adj     = {}
-  invAdj  = {}
-  bd      = []
 
-  test    = net.conflict_partition()
-  dstep   = net.diff_mrk()
-  pending.add(tuple(net.m0))
-
-  while len(pending) > 0:
-    current = np.asarray(pending.pop())
-    adj[tuple(current)] = []
-    ltr     = compute_maximal_steps(net.prem, current, test)
-    if ltr == []:
-      new_dead = False
-    else:
-      new_dead = True
-      for step in ltr:
-        flag = 0
-        for z in revd:
-          if step[z] > 0:
-            flag = 1
-        if flag == 0:
-          new_dead = False
-          newm = nextmrk_step(current,step,dstep)
-          if not(tuple(newm) in pmarks) and not(np.array_equal(newm, current)):
-            pending.add(tuple(newm))
-          adj[tuple(current)].append((tuple(step),tuple(newm)))
-          if tuple(newm) in invAdj.keys():
-            invAdj[tuple(newm)].append(tuple(current))
-          else:
-            invAdj[tuple(newm)] = [tuple(current)] 
-    if new_dead == True:
-      bd.append(tuple(current))
-    pmarks.append(tuple(current)) 
-  # End while
-  return update_mg(adj, invAdj, bd)
-  
-def genTree(adj, node, vn, leaves = []): 
+def genMSCT(mat, node, vn, ltr, confl_set, dstep, leaves = []): 
   """Input: the matrix of preconditions, the root of the tree, the list of nodes that 
      have already been visited, the list of maximal steps (?), the list of events in the net, 
      the sets of conflicts 
      Output: tree of maximal-step computations
   """
-  # vn: list of visited nodes in a path
+  # vn: list of visited nodes in a path 
   for x in vn:
     if np.array_equal(node.mrk, x.mrk) == True:   # Repeated marking
       node.isomrk = x
       leaves.append(node)
       return leaves
-  ltr = adj[tuple(node.mrk)]
+  ltr = compute_maximal_steps(mat, node.mrk, confl_set)
+  cltr = ltr.copy()
   if len(ltr) == 0:    # Deadlock
     node.dead = 1
     leaves.append(node)
     return leaves
   else:
-    for step in ltr:
+    for step in cltr:
       vn.append(node)
       cvn = vn.copy()
-      ntr = list(node.trace)
-      for i in range(len(ntr)):
-          ntr[i] += step[0][i]
-      newn = Nodo (step[1], tuple(ntr))
+      nm = nextmrk_step (node.mrk, step, dstep)
+      newn = Nodo (nm, node.trace + step)
       node.children.append(newn)
-      genTree (adj, newn, cvn, leaves)
+      genMSCT (mat, newn, cvn, ltr, confl_set, dstep, leaves)
   return leaves
-  
-@njit(parallel = True)
-def update_rev(rev, trace, live1):
-  for i in prange(len(trace)):
-    if trace[i] > 0:
-      live1[i] = 1
-      for j in prange(len(trace)):
-        if trace[j] == 0:
-          rev[i][j] = 1 
-  return rev, live1
 
 def comp_leaves(x, leaves):
   xleaves = []
@@ -228,7 +146,7 @@ def comp_leaves(x, leaves):
         app = True
       j += 1
   return xleaves
-
+  
 def elongate_path(n, x, y, root, cleaves = []):
   """Input: node of the tree ordered with respect to root, list of revealing events, 
      list of revealed events, starting point of the elongations to consider, list of 
@@ -249,9 +167,7 @@ def elongate_path(n, x, y, root, cleaves = []):
       nchild.dead = 1
     else:
       nchild.dead = 0
-    if nchild.dead == 0 and np.all(root.trace >= ancestor.trace) and np.any(ancestor.trace != root.trace):
-      print("root", root)
-      print("ancestor", ancestor)
+    if nchild.dead == 0 and np.all(ancestor.trace >= root.trace) and np.any(ancestor.trace != root.trace):      
       cleaves.append(nchild)
     else:
       i = 0
@@ -282,31 +198,24 @@ def update_paths(paths, x, y):
   """Input: list of nodes to extend, list of revealing event, list of revealed events
      Output: updated list of nodes that can still be useful to examine
   """
-  print("Entro in update_paths")
-  for p in paths:
-    print(p)
-  print("x: ", x, "  y: ", y)
   new_leaves = []
   for node in paths:
     if node.dead == 0:
       ancestor = node.isomrk
-      print("Chiamo elongate_path per ", ancestor)
       cleaves = elongate_path(ancestor, x, y, ancestor)
-      print("Ho calcolato ", cleaves)
       for leaf in cleaves:
         leaf.trace = leaf.trace + node.trace
-        print("el", leaf.trace)
       new_leaves.extend(cleaves)
   return new_leaves
-
+  
 def collective_reveals(ileaves, x, y, n):
-  """Input: list of nodes to explore for collective reveals, list of revealing transitions,
+  """Input: least of nodes to explore for collective reveals, list of revealing transitions,
      list of revealed transitions, number of occurrences of x for the collective reveals
      Output: 0 if n.x collective reveals y, 1 if it does not, 2 if there is no run with 
      n occurrences of x
   """
-  print("Entro in collective_reveals")
-  cleaves = ileaves.copy()      
+  cleaves = ileaves.copy()
+  empty = True       
   while cleaves != []:
     cl = cleaves.copy()
     for leaf in cl:
@@ -314,22 +223,93 @@ def collective_reveals(ileaves, x, y, n):
       for i in x:
         m = m + leaf.trace[i]
       if m >= n:
+        empty = False
         b = evaluate_path(leaf.trace, y)
         if b == False:
           return 1
         cleaves.remove(leaf) 
     if cleaves != []:
       cleaves = update_paths(cleaves, x, y)
-  return 0
+  if empty == True:
+    return 2
+  else:
+    return 0
+    
+@njit(parallel = True)
+def update_rev(rev, trace, live1):
+  for i in prange(len(trace)):
+    if trace[i] > 0:
+      live1[i] = 1
+      for j in prange(len(trace)):
+        if trace[j] == 0:
+          rev[i][j] = 1 
+  return rev, live1
   
 def comp_1rev(net, r, leaves, n):
     x = np.array(r[0])
     y = np.array(r[1])
     z = r[2]
     xleaves = comp_leaves(x, leaves)
-    return collective_reveals(xleaves, x, y, z)
+    ans = collective_reveals(xleaves, x, y, z)
+    if ans == 0:
+        print("The set "+ str(x) + " "+ str(z) + "-collective reveals " + str(y)) 
+    elif ans == 1:
+        print("The set "+ str(x) + " does NOT "+ str(z) + "-collective reveals " + str(y)) 
+    else:
+        print("There are no run with " + str(z) + " occurrences of " + str(x))  
+ 
+ 
+def comp_collRev1(net, rev, leaves, n, dtr = {}): 
+  if dtr != {}:
+    nrev = []
+    for r in rev:
+      nrev0 = []
+      nrev1 = []
+      for t in r[0]:
+        nrev0.append(dtr[t])
+      for t in r[1]:
+        nrev1.append(dtr[t])
+      nrev.append((nrev0, nrev1, r[2])) 
+    rev = nrev
+  for r in rev:
+    comp_1rev(net, r, leaves, n)  
+ 
+def cr_inter_mode(net, leaves, n):
+  while True:
+    cr = input("Collective-reveals relation to check: ") 
+    if cr == "quit()":
+      exit()
+    else:
+      print(cr)
+      cr = eval(cr)
+      comp_1rev(net, cr, leaves, n)
 
+@njit(parallel = True)
+def update_rev(rev, trace, live1):
+  for i in prange(len(trace)):
+    if trace[i] > 0:
+      live1[i] = 1
+      for j in prange(len(trace)):
+        if trace[j] == 0:
+          rev[i][j] = 1 
+  return rev, live1
+          
+def help():
+  print("--- Usage ---")
 
+def albero():
+  dpl = {}
+  dtr = {}
+  im, om, m0 = pnml2gti('buffer.pnml',dpl,dtr)    
+  net = PTnet(im, om, m0)
+  print("I am computing the tree...")
+  test = net.conflict_partition()
+  dstep = net.diff_mrk()
+  trace = np.zeros(net.prem.shape[1], np.uint8)
+  n = Nodo(net.m0, trace)
+  leaves = genMSCT(net.prem, n, [], [], test, dstep)
+  return n, leaves, net
+  
 if __name__ == "__main__":
   fn = None
   ft = None
@@ -374,56 +354,53 @@ if __name__ == "__main__":
   else:
       print("Either use -p or -t to specify a PT net")
       sys.exit(2)
-      
   if not(args or fr or interactive or al):
       print("Please, either specify a collective reveals relation to verify,")
       print("or use -i for the interactive mode, or -a to compute all the")
       print("reveals relations")
-      sys.exit(2)
       
   fc = net.check_free_choice()
   if fc == False:
       print("This net is not equal-conflict")
-      sys.exit(2)      
+      sys.exit(2)
   else:
-      if args:
-        qr = eval(args[0])
-        if fn:
-          qr = pnml2nf(qr, dtr) #reveal question
-      elif fr:
-        with open(fr, 'r') as f:
-          for line in f:
-            qr = eval(line)
-        if fn:
-          qr = pnml2nf(qr, dtr) 
-      else:  # interactive execution or all reveals execution
-        qr = ([], [], 1)
-      start = time.time()
-      adj = redmsmg(net, qr[1])
-      print(adj)
-      end = time.time()
-      print("Time for the marking graph: " + str(end - start))
+      print("I am computing the tree...")
+      test = net.conflict_partition()
+      dstep = net.diff_mrk()
       trace = np.zeros(net.prem.shape[1], np.uint8)
       n = Nodo(net.m0, trace)
-      leaves = genTree(adj, n, [], [])
-      print("--------------- Albero ---------------------")
-      n.printsubtree(0)
-      print("--------------------------------------------")
-      if al == True:
-        nTr = net.prem.shape[1]
-        rev = np.zeros([nTr,nTr], np.uint8)
-        live1 = np.zeros(nTr, np.uint8)
-        for leaf in leaves:
-          rev, live1 = update_rev(rev, leaf.trace, live1)
-        print("Matrix of reveals relations:")
-        print(rev)
-        print("-----------------")
-        print("1-live transitions: " + str(live1))  
-        if fn:
-          print(dtr)
-      if args or fr:
-        ans = comp_1rev(net, qr, leaves, n)
-        if ans == 0:
-          print("The set "+ str(qr[0]) + " "+ str(qr[2]) + "-collective reveals " + str(qr[1])) 
+      leaves = genMSCT(net.prem, n, [], [], test, dstep)
+      
+  if args:
+      print("--- ", args[0])
+      rev = [eval(args[0])] 
+      if fn:
+          comp_collRev1(net, rev, leaves, n, dtr)  
+      else:
+          comp_collRev1(net, rev, leaves, n)  
+  elif fr:
+    with open(fr, 'r') as f:
+      rev = []
+      for line in f:
+        rev.append(eval(line))
+      try:
+#        rev = [eval(data)] 
+        if fn:   #net in pnml
+            comp_collRev1(net, rev, leaves, n, dtr)
         else:
-          print("The set "+ str(qr[0]) + " does NOT "+ str(qr[2]) + "-collective reveals " + str(qr[1])) 
+            comp_collRev1(net, rev, leaves, n)  
+      except (SyntaxError, NameError):
+        stderr.write("%s: syntax error" % argv[0])
+        sys.exit(2)  
+  elif interactive == True:
+      cr_inter_mode(net, leaves, n)  
+  elif al == True:
+      nTr = net.prem.shape[1]
+      rev = np.zeros([nTr,nTr], np.uint8)
+      live1 = np.zeros(nTr, np.uint8)
+      for leaf in leaves:
+         rev, live1 = update_rev(rev, leaf.trace, live1)
+      print(rev)
+      print(live1)  
+      if fn:
+         print(dtr)     

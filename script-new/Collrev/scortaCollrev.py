@@ -249,7 +249,7 @@ def elongate_path(n, x, y, root, cleaves = []):
       nchild.dead = 1
     else:
       nchild.dead = 0
-    if nchild.dead == 0 and np.all(root.trace >= ancestor.trace) and np.any(ancestor.trace != root.trace):
+    if nchild.dead == 0 and np.all(ancestor.trace >= root.trace) and np.any(ancestor.trace != root.trace):
       print("root", root)
       print("ancestor", ancestor)
       cleaves.append(nchild)

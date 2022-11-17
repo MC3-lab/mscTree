@@ -1,0 +1,75 @@
+p 20.0 310.0 P2 1 se
+p 270.0 100.0 P4 1 sw
+p 210.0 620.0 Pback1 0 e
+p 270.0 340.0 Pback2 0 e
+p 75.0 140.0 Pback4 0 e
+p 250.0 540.0 Pm1 0 sw
+p 320.0 250.0 Pm2 0 sw
+p 120.0 250.0 Pm3 0 se
+p 180.0 60.0 Pm4 0 sw
+p 280.0 620.0 Pout1 0 sw
+p 220.0 140.0 Pout4 0 sw
+t 210.0 660.0 tback1 se 0 w n {} ne
+t 270.0 380.0 tback2 se 0 w n {} ne
+t 160.0 380.0 tback3 sw 0 w n {} ne
+t 75.0 190.0 tback4 e 0 w n {} ne
+t 180.0 20.0 tin4 s 0 w n {} ne
+t 280.0 580.0 tok1 sw 0 w n {} ne
+t 360.0 310.0 tok2 sw 0 w n {} ne
+t 80.0 310.0 tok3 se 0 w n {} ne
+t 210.0 100.0 tok4 sw 0 w n {} ne
+t 280.0 660.0 tout1 sw 0 w n {} ne
+t 210.0 580.0 tredo1 se 0 w n {} ne
+t 270.0 310.0 tredo2 se 0 w n {} ne
+t 75.0 100.0 tredo4 se 0 w n {} ne
+t 210.0 210.0 tsynch4_23 e 0 w n {} ne
+t 175.0 290.0 tredo3 sw 0 w n {} ne
+p 180.0 335.0 Pback3 0 sw
+p 75.0 395.0 Pout3 0 e
+p 345.0 575.0 P1 1 sw
+t 240.0 460.0 tsynch1_23 e 0 w n {} ne
+p 360.0 370.0 Pout2 0 sw
+p 500.0 295.0 P3 1 sw
+e tback3 Pm3 1 n
+e tback4 Pm4 1 n
+e tsynch4_23 0.6096457218 44.04543109 Pm3 0.03359654743 57.27128425 1 n
+e tsynch4_23 0.875 28.28427125 Pm2 0.2237157716 30.41381265 1 n
+e tsynch4_23 0.07379180882 22.36067977 P4 0.7110104348 57.72347876 1 n
+e P3 0.3502730111 59.40538696 tsynch4_23 0.0 170.0 1 n
+e P2 0.2302082879 80.62257749 tsynch4_23 0.5000000002 145.0 1 n
+e Pout4 tsynch4_23 1 n
+e tok1 Pout1 1 n
+e Pm1 tok1 1 n
+e tout1 0.0 40.0 P1 0.7610858698 43.10452412 1 n
+e Pout1 tout1 1 n
+e tsynch1_23 Pm1 1 n
+e tsynch1_23 0.505485928 145.0861813 P2 0.75935128 136.2350909 1 n
+e tsynch1_23 0.01323233803 192.6655133 P3 0.75 75.0 1 n
+e P1 0.3227091388 65.74191966 tsynch1_23 0.8989323564 94.40338973 1 n
+e Pout2 0.6311183282 73.59347797 tsynch1_23 0.07915455171 79.64923101 1 n
+e Pout3 0.9332104911 71.17583856 tsynch1_23 0.3808919344 38.20994635 1 n
+e tback2 0.5158627587 50.24937811 Pm2 0.521569906 111.0180166 1 n
+e Pback2 tback2 1 n
+e tok4 Pout4 1 n
+e Pback4 tback4 1 n
+e tback1 0.5 60.0 Pm1 0.5072293396 110.1135777 1 n
+e Pback1 tback1 1 n
+e tredo1 Pback1 1 n
+e Pm1 tredo1 1 n
+e tok2 Pout2 1 n
+e Pm2 tok2 1 n
+e Pm2 tredo2 1 n
+e tok3 Pout3 1 n
+e Pm3 tok3 1 n
+e Pback3 tback3 1 n
+e tredo3 Pback3 1 n
+e Pm3 tredo3 1 n
+e tredo2 Pback2 1 n
+e tredo4 Pback4 1 n
+e Pm4 tredo4 1 n
+e tin4 Pm4 1 n
+e P4 0.25 60.0 tin4 0.0 75.0 1 n
+e Pm4 tok4 1 n
+h Kanban small
+
+

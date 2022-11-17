@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!--created Thu Nov 17 16:03:04 2022 by ndrio version 3.7.0-->
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+ <net id="n-1C4A-8922C-0" type ="http://www.pnml.org/version-2009/grammar/ptnet">
+  <name>
+   <text>pnseB</text>
+  </name>
+ <page id="g-1C4A-89254-1">
+  <place id="p-1C4A-89255-2">
+  <name>
+   <text>p0</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="145" y="50"/>
+   </graphics>
+  </place>
+  <place id="p-1C4A-8925E-3">
+  <name>
+   <text>p1</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="145" y="200"/>
+   </graphics>
+  </place>
+  <place id="p-1C4A-8925F-4">
+  <name>
+   <text>p2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="515" y="120"/>
+   </graphics>
+  </place>
+  <place id="p-1C4A-89260-5">
+  <name>
+   <text>p3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="140" y="390"/>
+   </graphics>
+  </place>
+  <place id="p-1C4A-89261-6">
+  <name>
+   <text>p5</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="415" y="305"/>
+   </graphics>
+  </place>
+  <transition id="t-1C4A-89262-7">
+  <name>
+   <text>t0</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="245" y="120"/>
+   </graphics>
+  </transition>
+  <transition id="t-1C4A-89264-8">
+  <name>
+   <text>t1</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="25" y="120"/>
+   </graphics>
+  </transition>
+  <transition id="t-1C4A-89265-9">
+  <name>
+   <text>t2</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="375" y="40"/>
+   </graphics>
+  </transition>
+  <transition id="t-1C4A-89266-10">
+  <name>
+   <text>t3</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="375" y="200"/>
+   </graphics>
+  </transition>
+  <transition id="t-1C4A-89267-11">
+  <name>
+   <text>t4</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="140" y="295"/>
+   </graphics>
+  </transition>
+  <transition id="t-1C4A-89267-12">
+  <name>
+   <text>t5</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="330" y="255"/>
+   </graphics>
+  </transition>
+  <transition id="t-1C4A-89268-13">
+  <name>
+   <text>t6</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="325" y="380"/>
+   </graphics>
+  </transition>
+  <arc id="e-1C4A-8926A-14" source="t-1C4A-89268-13" target="p-1C4A-89260-5">
+  </arc>
+  <arc id="e-1C4A-8926B-15" source="t-1C4A-89264-8" target="p-1C4A-89255-2">
+  </arc>
+  <arc id="e-1C4A-8926B-16" source="p-1C4A-89255-2" target="t-1C4A-89265-9">
+  </arc>
+  <arc id="e-1C4A-8926C-17" source="t-1C4A-89265-9" target="p-1C4A-8925F-4">
+  </arc>
+  <arc id="e-1C4A-8926C-18" source="p-1C4A-8925F-4" target="t-1C4A-89266-10">
+  </arc>
+  <arc id="e-1C4A-8926D-19" source="t-1C4A-89266-10" target="p-1C4A-8925E-3">
+  </arc>
+  <arc id="e-1C4A-8926D-20" source="p-1C4A-89260-5" target="t-1C4A-89267-12">
+  </arc>
+  <arc id="e-1C4A-8926E-21" source="p-1C4A-89261-6" target="t-1C4A-89268-13">
+  </arc>
+  <arc id="e-1C4A-8926E-22" source="t-1C4A-89267-12" target="p-1C4A-89261-6">
+  </arc>
+  <arc id="e-1C4A-8926F-23" source="t-1C4A-89267-11" target="p-1C4A-89260-5">
+  </arc>
+  <arc id="e-1C4A-8926F-24" source="p-1C4A-8925E-3" target="t-1C4A-89267-11">
+  </arc>
+  <arc id="e-1C4A-89270-25" source="p-1C4A-89255-2" target="t-1C4A-89262-7">
+  </arc>
+  <arc id="e-1C4A-89271-26" source="t-1C4A-89262-7" target="p-1C4A-8925E-3">
+  </arc>
+  <arc id="e-1C4A-89271-27" source="p-1C4A-8925E-3" target="t-1C4A-89264-8">
+  </arc>
+ </page>
+ </net>
+</pnml>

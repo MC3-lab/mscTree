@@ -1,0 +1,500 @@
+<?xml version="1.0"?>
+<!--created Sun Nov 27 18:29:34 2022 by ndrio version 3.7.0-->
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+ <net id="n-BDB-327B9-0" type ="http://www.pnml.org/version-2009/grammar/ptnet">
+  <toolspecific tool="Tina" version="3.7.0">
+   <size>small</size>
+  </toolspecific>
+  <name>
+   <text>Kanban-5</text>
+  </name>
+ <page id="g-BDB-327E9-1">
+  <place id="p-BDB-327ED-2">
+  <name>
+   <text>P1</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="345" y="575"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-327F7-3">
+  <name>
+   <text>P2</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="20" y="310"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-327FA-4">
+  <name>
+   <text>P3</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="500" y="295"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-327FD-5">
+  <name>
+   <text>P4</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="270" y="100"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-327FE-6">
+  <name>
+   <text>Pback1</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="210" y="620"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32800-7">
+  <name>
+   <text>Pback2</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="270" y="340"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32803-8">
+  <name>
+   <text>Pback3</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="180" y="335"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32804-9">
+  <name>
+   <text>Pback4</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="75" y="140"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32806-10">
+  <name>
+   <text>Pm1</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="250" y="540"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32809-11">
+  <name>
+   <text>Pm2</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="320" y="250"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-3280A-12">
+  <name>
+   <text>Pm3</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="120" y="250"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-3280C-13">
+  <name>
+   <text>Pm4</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="180" y="60"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-3280D-14">
+  <name>
+   <text>Pout1</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="280" y="620"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32811-15">
+  <name>
+   <text>Pout2</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="360" y="370"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32813-16">
+  <name>
+   <text>Pout3</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="75" y="395"/>
+   </graphics>
+  </place>
+  <place id="p-BDB-32814-17">
+  <name>
+   <text>Pout4</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="220" y="140"/>
+   </graphics>
+  </place>
+  <transition id="t-BDB-32817-18">
+  <name>
+   <text>tback1</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="210" y="660"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-3281B-19">
+  <name>
+   <text>tback2</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="270" y="380"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32832-20">
+  <name>
+   <text>tback3</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="160" y="380"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32834-21">
+  <name>
+   <text>tback4</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="75" y="190"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32835-22">
+  <name>
+   <text>tin4</text>
+    <graphics>
+     <offset x="0" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="180" y="20"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32838-23">
+  <name>
+   <text>tok1</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="280" y="580"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-3283A-24">
+  <name>
+   <text>tok2</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="360" y="310"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-3283B-25">
+  <name>
+   <text>tok3</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="80" y="310"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-3283E-26">
+  <name>
+   <text>tok4</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="210" y="100"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32840-27">
+  <name>
+   <text>tout1</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="280" y="660"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32841-28">
+  <name>
+   <text>tredo1</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="210" y="580"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32844-29">
+  <name>
+   <text>tredo2</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="270" y="310"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32846-30">
+  <name>
+   <text>tredo3</text>
+    <graphics>
+     <offset x="-10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="175" y="290"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-32847-31">
+  <name>
+   <text>tredo4</text>
+    <graphics>
+     <offset x="10" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="75" y="100"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-3284B-32">
+  <name>
+   <text>tsynch1_23</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="240" y="460"/>
+   </graphics>
+  </transition>
+  <transition id="t-BDB-3284D-33">
+  <name>
+   <text>tsynch4_23</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="210" y="210"/>
+   </graphics>
+  </transition>
+  <arc id="e-BDB-32850-34" source="p-BDB-3280C-13" target="t-BDB-3283E-26">
+  </arc>
+  <arc id="e-BDB-32852-35" source="p-BDB-3280A-12" target="t-BDB-3283B-25">
+  </arc>
+  <arc id="e-BDB-32853-36" source="t-BDB-3283B-25" target="p-BDB-32813-16">
+  </arc>
+  <arc id="e-BDB-32854-37" source="p-BDB-32809-11" target="t-BDB-32844-29">
+  </arc>
+  <arc id="e-BDB-32855-38" source="p-BDB-32809-11" target="t-BDB-3283A-24">
+  </arc>
+  <arc id="e-BDB-32855-39" source="t-BDB-3283A-24" target="p-BDB-32811-15">
+  </arc>
+  <arc id="e-BDB-32856-40" source="p-BDB-32806-10" target="t-BDB-32841-28">
+  </arc>
+  <arc id="e-BDB-32857-41" source="t-BDB-32841-28" target="p-BDB-327FE-6">
+  </arc>
+  <arc id="e-BDB-32858-42" source="p-BDB-327FE-6" target="t-BDB-32817-18">
+  </arc>
+  <arc id="e-BDB-3285B-43" source="t-BDB-32817-18" target="p-BDB-32806-10">
+   <graphics>
+    <position x="162" y="660" />
+    <position x="162" y="544" />
+   </graphics>  </arc>
+  <arc id="e-BDB-3286F-44" source="p-BDB-32804-9" target="t-BDB-32834-21">
+  </arc>
+  <arc id="e-BDB-32870-45" source="p-BDB-327FD-5" target="t-BDB-32835-22">
+   <graphics>
+    <position x="270" y="52" />
+    <position x="240" y="20" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32872-46" source="t-BDB-3283E-26" target="p-BDB-32814-17">
+  </arc>
+  <arc id="e-BDB-32873-47" source="p-BDB-32800-7" target="t-BDB-3281B-19">
+  </arc>
+  <arc id="e-BDB-32874-48" source="t-BDB-3281B-19" target="p-BDB-32809-11">
+   <graphics>
+    <position x="230" y="384" />
+    <position x="232" y="262" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32875-49" source="p-BDB-32813-16" target="t-BDB-3284B-32">
+   <graphics>
+    <position x="127" y="418" />
+    <position x="218" y="439" />
+   </graphics>  </arc>
+  <arc id="e-BDB-3287B-50" source="p-BDB-32811-15" target="t-BDB-3284B-32">
+   <graphics>
+    <position x="320" y="413" />
+    <position x="296" y="430" />
+   </graphics>  </arc>
+  <arc id="e-BDB-3287D-51" source="p-BDB-327ED-2" target="t-BDB-3284B-32">
+   <graphics>
+    <position x="322" y="528" />
+    <position x="301" y="505" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32880-52" source="t-BDB-3284B-32" target="p-BDB-327FA-4">
+   <graphics>
+    <position x="394" y="447" />
+    <position x="500" y="355" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32882-53" source="t-BDB-3284B-32" target="p-BDB-327F7-3">
+   <graphics>
+    <position x="124" y="464" />
+    <position x="26" y="419" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32883-54" source="t-BDB-3284B-32" target="p-BDB-32806-10">
+  </arc>
+  <arc id="e-BDB-32884-55" source="p-BDB-3280D-14" target="t-BDB-32840-27">
+  </arc>
+  <arc id="e-BDB-32885-56" source="t-BDB-32835-22" target="p-BDB-3280C-13">
+  </arc>
+  <arc id="e-BDB-32886-57" source="t-BDB-32840-27" target="p-BDB-327ED-2">
+   <graphics>
+    <position x="312" y="660" />
+    <position x="347" y="609" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32887-58" source="p-BDB-32806-10" target="t-BDB-32838-23">
+  </arc>
+  <arc id="e-BDB-32888-59" source="t-BDB-32838-23" target="p-BDB-3280D-14">
+  </arc>
+  <arc id="e-BDB-32889-60" source="p-BDB-32814-17" target="t-BDB-3284D-33">
+  </arc>
+  <arc id="e-BDB-32891-61" source="p-BDB-327F7-3" target="t-BDB-3284D-33">
+   <graphics>
+    <position x="28" y="246" />
+    <position x="94" y="210" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32892-62" source="p-BDB-327FA-4" target="t-BDB-3284D-33">
+   <graphics>
+    <position x="472" y="257" />
+    <position x="346" y="210" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32893-63" source="t-BDB-3284D-33" target="p-BDB-327FD-5">
+   <graphics>
+    <position x="226" y="202" />
+    <position x="259" y="145" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32894-64" source="t-BDB-3284D-33" target="p-BDB-32809-11">
+   <graphics>
+    <position x="226" y="226" />
+    <position x="324" y="226" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32895-65" source="t-BDB-3284D-33" target="p-BDB-3280A-12">
+   <graphics>
+    <position x="183" y="232" />
+    <position x="165" y="240" />
+   </graphics>  </arc>
+  <arc id="e-BDB-32896-66" source="t-BDB-32834-21" target="p-BDB-3280C-13">
+  </arc>
+  <arc id="e-BDB-32897-67" source="p-BDB-3280C-13" target="t-BDB-32847-31">
+  </arc>
+  <arc id="e-BDB-32897-68" source="t-BDB-32832-20" target="p-BDB-3280A-12">
+  </arc>
+  <arc id="e-BDB-32898-69" source="t-BDB-32847-31" target="p-BDB-32804-9">
+  </arc>
+  <arc id="e-BDB-32899-70" source="t-BDB-32844-29" target="p-BDB-32800-7">
+  </arc>
+  <arc id="e-BDB-32899-71" source="p-BDB-3280A-12" target="t-BDB-32846-30">
+  </arc>
+  <arc id="e-BDB-3289A-72" source="t-BDB-32846-30" target="p-BDB-32803-8">
+  </arc>
+  <arc id="e-BDB-3289A-73" source="p-BDB-32803-8" target="t-BDB-32832-20">
+  </arc>
+ </page>
+ </net>
+</pnml>

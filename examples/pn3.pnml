@@ -1,0 +1,1274 @@
+<?xml version="1.0"?>
+<!--created Sat Nov 19 17:02:36 2022 by ndrio version 3.7.0-->
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+ <net id="n-4268-83964-0" type ="http://www.pnml.org/version-2009/grammar/ptnet">
+  <name>
+   <text>paperExFig3-4-exp-par-cyc</text>
+  </name>
+ <page id="g-4268-8399F-1">
+  <place id="p-4268-839A2-2">
+  <name>
+   <text>p0</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="365" y="260"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839BD-3">
+  <name>
+   <text>p1</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="540"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839C0-4">
+  <name>
+   <text>p10</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="405" y="1230"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839C3-5">
+  <name>
+   <text>p11</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="595" y="1220"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839C4-6">
+  <name>
+   <text>p12</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="360"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839C5-7">
+  <name>
+   <text>p13</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="365" y="380"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839C9-8">
+  <name>
+   <text>p14</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="475" y="370"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839CA-9">
+  <name>
+   <text>p15</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="720"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839CF-10">
+  <name>
+   <text>p16</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="75" y="740"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839D0-11">
+  <name>
+   <text>p17</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="720"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839D1-12">
+  <name>
+   <text>p18</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="765" y="710"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839D3-13">
+  <name>
+   <text>p19</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="1100"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839D4-14">
+  <name>
+   <text>p2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="375" y="540"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839D7-15">
+  <name>
+   <text>p20</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="385" y="1100"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839D8-16">
+  <name>
+   <text>p21</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="1080"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839DA-17">
+  <name>
+   <text>p22</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="745" y="50"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839DD-18">
+  <name>
+   <text>p23</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1205" y="300"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839DF-19">
+  <name>
+   <text>p24</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1275" y="300"/>
+   </graphics>
+  </place>
+  <place id="p-4268-839E1-20">
+  <name>
+   <text>p25</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1505" y="300"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A45-21">
+  <name>
+   <text>p26</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1435" y="300"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A48-22">
+  <name>
+   <text>p27</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1275" y="420"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A49-23">
+  <name>
+   <text>p28</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1435" y="410"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A4B-24">
+  <name>
+   <text>p29</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1165" y="500"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A4C-25">
+  <name>
+   <text>p3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="485" y="520"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A4F-26">
+  <name>
+   <text>p30</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1525" y="500"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A50-27">
+  <name>
+   <text>p31</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1085" y="720"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A51-28">
+  <name>
+   <text>p32</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1155" y="720"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A54-29">
+  <name>
+   <text>p33</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1495" y="700"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A55-30">
+  <name>
+   <text>p34</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1565" y="700"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A57-31">
+  <name>
+   <text>p35</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1075" y="860"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A59-32">
+  <name>
+   <text>p36</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1175" y="860"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A5D-33">
+  <name>
+   <text>p37</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1275" y="850"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A5E-34">
+  <name>
+   <text>p38</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1405" y="830"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A60-35">
+  <name>
+   <text>p39</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1505" y="840"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A62-36">
+  <name>
+   <text>p4</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="125" y="530"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A63-37">
+  <name>
+   <text>p40</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1575" y="840"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A65-38">
+  <name>
+   <text>p41</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="955" y="580"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A66-39">
+  <name>
+   <text>p42</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1665" y="590"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A6B-40">
+  <name>
+   <text>p43</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1355" y="980"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A8F-41">
+  <name>
+   <text>p44</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1365" y="1150"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A92-42">
+  <name>
+   <text>p45</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="705" y="160"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A93-43">
+  <name>
+   <text>p46</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="775" y="160"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A97-44">
+  <name>
+   <text>p5</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="665" y="520"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A98-45">
+  <name>
+   <text>p6</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="940"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A99-46">
+  <name>
+   <text>p7</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="395" y="940"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A9C-47">
+  <name>
+   <text>p8</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="585" y="930"/>
+   </graphics>
+  </place>
+  <place id="p-4268-83A9D-48">
+  <name>
+   <text>p9</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="1240"/>
+   </graphics>
+  </place>
+  <transition id="t-4268-83AA1-49">
+  <name>
+   <text>t0</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="310"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AA3-50">
+  <name>
+   <text>t1</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="365" y="320"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AA8-51">
+  <name>
+   <text>t10</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="440"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AA9-52">
+  <name>
+   <text>t11</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="375" y="440"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AAA-53">
+  <name>
+   <text>t12</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="475" y="440"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AAC-54">
+  <name>
+   <text>t13</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="780"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AAE-55">
+  <name>
+   <text>t14</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="105" y="810"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AB0-56">
+  <name>
+   <text>t15</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="780"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AB1-57">
+  <name>
+   <text>t16</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="725" y="780"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AB4-58">
+  <name>
+   <text>t17</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="165" y="1150"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AB5-59">
+  <name>
+   <text>t18</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="385" y="1150"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ABB-60">
+  <name>
+   <text>t19</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="1140"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ACB-61">
+  <name>
+   <text>t2</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="465" y="320"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ACD-62">
+  <name>
+   <text>t20</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="635" y="200"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ACF-63">
+  <name>
+   <text>t21</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="905" y="200"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AD0-64">
+  <name>
+   <text>t22</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1275" y="360"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AD3-65">
+  <name>
+   <text>t23</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1435" y="360"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AD4-66">
+  <name>
+   <text>t24</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1445" y="510"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AD6-67">
+  <name>
+   <text>t25</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1275" y="510"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AD8-68">
+  <name>
+   <text>t26</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1165" y="660"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ADA-69">
+  <name>
+   <text>t27</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1075" y="660"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ADB-70">
+  <name>
+   <text>t28</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1175" y="800"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ADD-71">
+  <name>
+   <text>t29</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1085" y="780"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83ADF-72">
+  <name>
+   <text>t3</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="45" y="660"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AE0-73">
+  <name>
+   <text>t30</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="955" y="500"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AE5-74">
+  <name>
+   <text>t31</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="955" y="660"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AE6-75">
+  <name>
+   <text>t32</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1355" y="900"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AE9-76">
+  <name>
+   <text>t33</text>
+    <graphics>
+     <offset x="0" y="10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1365" y="1040"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AEA-77">
+  <name>
+   <text>t34</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1495" y="620"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AEC-78">
+  <name>
+   <text>t35</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1565" y="620"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83AEE-79">
+  <name>
+   <text>t36</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1505" y="760"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B14-80">
+  <name>
+   <text>t37</text>
+    <graphics>
+     <offset x="10" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1565" y="760"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B15-81">
+  <name>
+   <text>t38</text>
+    <graphics>
+     <offset x="10" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1685" y="700"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B17-82">
+  <name>
+   <text>t39</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1665" y="490"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B1A-83">
+  <name>
+   <text>t4</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="195" y="640"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B1B-84">
+  <name>
+   <text>t40</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="745" y="120"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B1D-85">
+  <name>
+   <text>t41</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1365" y="1240"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B1E-86">
+  <name>
+   <text>t42</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="690" y="1235"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B21-87">
+  <name>
+   <text>t43</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="40" y="1245"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B22-88">
+  <name>
+   <text>t5</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="575" y="640"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B24-89">
+  <name>
+   <text>t6</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="765" y="640"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B25-90">
+  <name>
+   <text>t7</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="1040"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B26-91">
+  <name>
+   <text>t8</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="405" y="1020"/>
+   </graphics>
+  </transition>
+  <transition id="t-4268-83B29-92">
+  <name>
+   <text>t9</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="605" y="1030"/>
+   </graphics>
+  </transition>
+  <arc id="e-4268-83B2D-93" source="t-4268-83B21-87" target="p-4268-839A2-2">
+   <graphics>
+    <position x="17" y="964" />
+    <position x="83" y="310" />
+   </graphics>  </arc>
+  <arc id="e-4268-83B36-94" source="t-4268-83ACF-63" target="p-4268-839DF-19">
+  </arc>
+  <arc id="e-4268-83B37-95" source="p-4268-839D3-13" target="t-4268-83AB4-58">
+  </arc>
+  <arc id="e-4268-83B38-96" source="t-4268-83AB4-58" target="p-4268-83A9D-48">
+  </arc>
+  <arc id="e-4268-83B39-97" source="t-4268-83B26-91" target="p-4268-839D7-15">
+  </arc>
+  <arc id="e-4268-83B39-98" source="p-4268-839D7-15" target="t-4268-83AB5-59">
+  </arc>
+  <arc id="e-4268-83B3A-99" source="p-4268-83A93-43" target="t-4268-83ACF-63">
+  </arc>
+  <arc id="e-4268-83B3B-100" source="t-4268-83ACF-63" target="p-4268-839DD-18">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-4268-83B3E-101" source="t-4268-83AE0-73" target="p-4268-839DF-19">
+   <graphics>
+    <position x="955" y="288" />
+    <position x="1235" y="224" />
+   </graphics>  </arc>
+  <arc id="e-4268-83B40-102" source="p-4268-83A65-38" target="t-4268-83AE0-73">
+  </arc>
+  <arc id="e-4268-83B40-103" source="t-4268-83AE5-74" target="p-4268-83A65-38">
+  </arc>
+  <arc id="e-4268-83B62-104" source="p-4268-83A59-32" target="t-4268-83AE5-74">
+   <graphics>
+    <position x="1143" y="948" />
+    <position x="943" y="836" />
+   </graphics>  </arc>
+  <arc id="e-4268-83B64-105" source="t-4268-83AB5-59" target="p-4268-839C0-4">
+  </arc>
+  <arc id="e-4268-83B66-106" source="t-4268-83B17-82" target="p-4268-83A45-21">
+   <graphics>
+    <position x="1673" y="342" />
+    <position x="1515" y="208" />
+   </graphics>  </arc>
+  <arc id="e-4268-83B68-107" source="p-4268-83A66-39" target="t-4268-83B17-82">
+  </arc>
+  <arc id="e-4268-83B69-108" source="t-4268-83B15-81" target="p-4268-83A66-39">
+  </arc>
+  <arc id="e-4268-83B69-109" source="p-4268-83A9D-48" target="t-4268-83B21-87">
+  </arc>
+  <arc id="e-4268-83B6A-110" source="p-4268-83A60-35" target="t-4268-83B15-81">
+   <graphics>
+    <position x="1553" y="952" />
+    <position x="1669" y="832" />
+   </graphics>  </arc>
+  <arc id="e-4268-83B6C-111" source="t-4268-83AE9-76" target="p-4268-83A8F-41">
+  </arc>
+  <arc id="e-4268-83B6E-112" source="p-4268-83A6B-40" target="t-4268-83AE9-76">
+  </arc>
+  <arc id="e-4268-83B6F-113" source="t-4268-83AE6-75" target="p-4268-83A6B-40">
+  </arc>
+  <arc id="e-4268-83B6F-114" source="t-4268-83B14-80" target="p-4268-83A63-37">
+  </arc>
+  <arc id="e-4268-83B70-115" source="p-4268-83A5D-33" target="t-4268-83AE6-75">
+  </arc>
+  <arc id="e-4268-83B71-116" source="p-4268-83A5E-34" target="t-4268-83AE6-75">
+  </arc>
+  <arc id="e-4268-83B71-117" source="t-4268-83B29-92" target="p-4268-839D8-16">
+  </arc>
+  <arc id="e-4268-83B72-118" source="t-4268-83AEE-79" target="p-4268-83A5E-34">
+  </arc>
+  <arc id="e-4268-83B73-119" source="t-4268-83AEE-79" target="p-4268-83A60-35">
+  </arc>
+  <arc id="e-4268-83B75-120" source="t-4268-83B1E-86" target="p-4268-839A2-2">
+   <graphics>
+    <position x="809" y="1039" />
+    <position x="714" y="287" />
+   </graphics>  </arc>
+  <arc id="e-4268-83B77-121" source="t-4268-83ADB-70" target="p-4268-83A5D-33">
+  </arc>
+  <arc id="e-4268-83B77-122" source="t-4268-83ADB-70" target="p-4268-83A59-32">
+  </arc>
+  <arc id="e-4268-83B78-123" source="t-4268-83ADD-71" target="p-4268-83A57-31">
+  </arc>
+  <arc id="e-4268-83B79-124" source="p-4268-83A51-28" target="t-4268-83ADB-70">
+  </arc>
+  <arc id="e-4268-83B79-125" source="t-4268-83AD8-68" target="p-4268-83A51-28">
+  </arc>
+  <arc id="e-4268-83B7A-126" source="p-4268-83A50-27" target="t-4268-83ADD-71">
+  </arc>
+  <arc id="e-4268-83B7C-127" source="t-4268-83ADA-69" target="p-4268-83A50-27">
+  </arc>
+  <arc id="e-4268-83B7D-128" source="p-4268-83A55-30" target="t-4268-83B14-80">
+  </arc>
+  <arc id="e-4268-83B7E-129" source="p-4268-839D8-16" target="t-4268-83ABB-60">
+  </arc>
+  <arc id="e-4268-83B7E-130" source="t-4268-83AEC-78" target="p-4268-83A55-30">
+  </arc>
+  <arc id="e-4268-83B7F-131" source="p-4268-839C3-5" target="t-4268-83B1E-86">
+  </arc>
+  <arc id="e-4268-83B80-132" source="p-4268-83A54-29" target="t-4268-83AEE-79">
+  </arc>
+  <arc id="e-4268-83B80-133" source="t-4268-83AEA-77" target="p-4268-83A54-29">
+  </arc>
+  <arc id="e-4268-83B82-134" source="p-4268-83A4F-26" target="t-4268-83AEC-78">
+  </arc>
+  <arc id="e-4268-83B83-135" source="p-4268-83A4F-26" target="t-4268-83AEA-77">
+  </arc>
+  <arc id="e-4268-83B84-136" source="t-4268-83AD4-66" target="p-4268-83A4F-26">
+  </arc>
+  <arc id="e-4268-83B84-137" source="p-4268-83A49-23" target="t-4268-83AD4-66">
+  </arc>
+  <arc id="e-4268-83B85-138" source="t-4268-83AD3-65" target="p-4268-83A49-23">
+  </arc>
+  <arc id="e-4268-83B86-139" source="p-4268-839E1-20" target="t-4268-83AD3-65">
+  </arc>
+  <arc id="e-4268-83B86-140" source="p-4268-83A45-21" target="t-4268-83AD3-65">
+  </arc>
+  <arc id="e-4268-83B87-141" source="t-4268-83ABB-60" target="p-4268-839C3-5">
+  </arc>
+  <arc id="e-4268-83B89-142" source="t-4268-83B1D-85" target="p-4268-839DF-19">
+   <graphics>
+    <position x="1101" y="1235" />
+    <position x="870" y="382" />
+   </graphics>  </arc>
+  <arc id="e-4268-83B8B-143" source="p-4268-83A4B-24" target="t-4268-83ADA-69">
+  </arc>
+  <arc id="e-4268-83B8B-144" source="p-4268-83A4B-24" target="t-4268-83AD8-68">
+  </arc>
+  <arc id="e-4268-83BAB-145" source="t-4268-83AD6-67" target="p-4268-83A4B-24">
+  </arc>
+  <arc id="e-4268-83BAC-146" source="p-4268-83A48-22" target="t-4268-83AD6-67">
+  </arc>
+  <arc id="e-4268-83BAD-147" source="t-4268-83AD0-64" target="p-4268-83A48-22">
+  </arc>
+  <arc id="e-4268-83BAF-148" source="p-4268-839DD-18" target="t-4268-83AD0-64">
+  </arc>
+  <arc id="e-4268-83BB0-149" source="p-4268-839DF-19" target="t-4268-83AD0-64">
+  </arc>
+  <arc id="e-4268-83BB1-150" source="t-4268-83ACD-62" target="p-4268-83A62-36">
+   <graphics>
+    <position x="411" y="168" />
+    <position x="125" y="362" />
+   </graphics>  </arc>
+  <arc id="e-4268-83BB2-151" source="t-4268-83ACD-62" target="p-4268-83A97-44">
+  </arc>
+  <arc id="e-4268-83BB3-152" source="t-4268-83ACD-62" target="p-4268-839A2-2">
+   <inscription>
+    <text>3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-4268-83BB4-153" source="t-4268-83B1D-85" target="p-4268-83A45-21">
+   <graphics>
+    <position x="1872" y="1118" />
+    <position x="1661" y="186" />
+   </graphics>  </arc>
+  <arc id="e-4268-83BB7-154" source="p-4268-839DA-17" target="t-4268-83B1B-84">
+  </arc>
+  <arc id="e-4268-83BB8-155" source="p-4268-83A99-46" target="t-4268-83B26-91">
+   <inscription>
+    <text>3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-4268-83BB9-156" source="p-4268-83A98-45" target="t-4268-83B25-90">
+  </arc>
+  <arc id="e-4268-83BBA-157" source="t-4268-83ADF-72" target="p-4268-83A62-36">
+  </arc>
+  <arc id="e-4268-83BBA-158" source="p-4268-83A62-36" target="t-4268-83B1A-83">
+  </arc>
+  <arc id="e-4268-83BBB-159" source="p-4268-839BD-3" target="t-4268-83B1A-83">
+  </arc>
+  <arc id="e-4268-83BBD-160" source="p-4268-83A9C-47" target="t-4268-83B29-92">
+  </arc>
+  <arc id="e-4268-83BBE-161" source="t-4268-83B24-89" target="p-4268-83A97-44">
+  </arc>
+  <arc id="e-4268-83BBF-162" source="p-4268-83A4C-25" target="t-4268-83B22-88">
+  </arc>
+  <arc id="e-4268-83BBF-163" source="p-4268-83A97-44" target="t-4268-83B22-88">
+  </arc>
+  <arc id="e-4268-83BC0-164" source="p-4268-83A8F-41" target="t-4268-83B1D-85">
+  </arc>
+  <arc id="e-4268-83BC0-165" source="p-4268-839A2-2" target="t-4268-83ACB-61">
+  </arc>
+  <arc id="e-4268-83BC1-166" source="t-4268-83B1B-84" target="p-4268-83A92-42">
+  </arc>
+  <arc id="e-4268-83BC2-167" source="p-4268-839A2-2" target="t-4268-83AA3-50">
+  </arc>
+  <arc id="e-4268-83BC4-168" source="p-4268-839A2-2" target="t-4268-83AA1-49">
+  </arc>
+  <arc id="e-4268-83BC5-169" source="t-4268-83AA1-49" target="p-4268-839C4-6">
+  </arc>
+  <arc id="e-4268-83BC5-170" source="p-4268-839C4-6" target="t-4268-83AA8-51">
+  </arc>
+  <arc id="e-4268-83BC6-171" source="t-4268-83AA8-51" target="p-4268-839BD-3">
+  </arc>
+  <arc id="e-4268-83BC7-172" source="t-4268-83AA3-50" target="p-4268-839C5-7">
+  </arc>
+  <arc id="e-4268-83BC8-173" source="p-4268-839C5-7" target="t-4268-83AA9-52">
+  </arc>
+  <arc id="e-4268-83BC8-174" source="t-4268-83AA9-52" target="p-4268-839D4-14">
+  </arc>
+  <arc id="e-4268-83BCB-175" source="t-4268-83ACF-63" target="p-4268-839E1-20">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-4268-83BCC-176" source="t-4268-83ACB-61" target="p-4268-839C9-8">
+  </arc>
+  <arc id="e-4268-83BCC-177" source="p-4268-839C9-8" target="t-4268-83AAA-53">
+  </arc>
+  <arc id="e-4268-83BCD-178" source="t-4268-83B1B-84" target="p-4268-83A93-43">
+  </arc>
+  <arc id="e-4268-83BCE-179" source="t-4268-83AAA-53" target="p-4268-83A4C-25">
+  </arc>
+  <arc id="e-4268-83BCE-180" source="t-4268-83B1A-83" target="p-4268-839CA-9">
+  </arc>
+  <arc id="e-4268-83BCF-181" source="p-4268-839CA-9" target="t-4268-83AAC-54">
+  </arc>
+  <arc id="e-4268-83BD1-182" source="t-4268-83AAC-54" target="p-4268-83A98-45">
+  </arc>
+  <arc id="e-4268-83BD2-183" source="t-4268-83AAC-54" target="p-4268-83A99-46">
+  </arc>
+  <arc id="e-4268-83BD3-184" source="t-4268-83B22-88" target="p-4268-839D0-11">
+  </arc>
+  <arc id="e-4268-83BF8-185" source="p-4268-839D0-11" target="t-4268-83AB0-56">
+  </arc>
+  <arc id="e-4268-83BF9-186" source="t-4268-83ACF-63" target="p-4268-83A45-21">
+  </arc>
+  <arc id="e-4268-83BFA-187" source="t-4268-83AB0-56" target="p-4268-83A9C-47">
+  </arc>
+  <arc id="e-4268-83BFB-188" source="t-4268-83AB0-56" target="p-4268-83A99-46">
+  </arc>
+  <arc id="e-4268-83BFB-189" source="p-4268-83A9C-47" target="t-4268-83AB1-57">
+  </arc>
+  <arc id="e-4268-83BFE-190" source="p-4268-83A92-42" target="t-4268-83ACD-62">
+  </arc>
+  <arc id="e-4268-83BFE-191" source="t-4268-83AB1-57" target="p-4268-839D1-12">
+  </arc>
+  <arc id="e-4268-83BFF-192" source="p-4268-839D1-12" target="t-4268-83B24-89">
+  </arc>
+  <arc id="e-4268-83C00-193" source="p-4268-83A98-45" target="t-4268-83AAE-55">
+  </arc>
+  <arc id="e-4268-83C01-194" source="t-4268-83AAE-55" target="p-4268-839CF-10">
+  </arc>
+  <arc id="e-4268-83C01-195" source="p-4268-839CF-10" target="t-4268-83ADF-72">
+  </arc>
+  <arc id="e-4268-83C02-196" source="t-4268-83B25-90" target="p-4268-839D3-13">
+  </arc>
+ </page>
+ </net>
+</pnml>

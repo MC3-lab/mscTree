@@ -1,0 +1,358 @@
+<?xml version="1.0"?>
+<!--created Sun Nov 27 16:53:23 2022 by ndrio version 3.7.0-->
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+ <net id="n-A98-73CF0-0" type ="http://www.pnml.org/version-2009/grammar/ptnet">
+  <toolspecific tool="Tina" version="3.7.0">
+   <size>small</size>
+  </toolspecific>
+  <name>
+   <text>kanban3</text>
+  </name>
+ <page id="g-A98-73D16-1">
+  <place id="p-A98-73D17-2">
+  <name>
+   <text>p0</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="220" y="30"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D1F-3">
+  <name>
+   <text>p1</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="80" y="85"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D20-4">
+  <name>
+   <text>p10</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="290" y="380"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D22-5">
+  <name>
+   <text>p11</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="395" y="375"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D22-6">
+  <name>
+   <text>p2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="20" y="145"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D23-7">
+  <name>
+   <text>p3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="155" y="140"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D24-8">
+  <name>
+   <text>p4</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="345" y="140"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D26-9">
+  <name>
+   <text>p5</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="220" y="200"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D27-10">
+  <name>
+   <text>p6</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="155" y="265"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D28-11">
+  <name>
+   <text>p7</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="260"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D29-12">
+  <name>
+   <text>p8</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="345" y="320"/>
+   </graphics>
+  </place>
+  <place id="p-A98-73D2A-13">
+  <name>
+   <text>p9</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="445" y="260"/>
+   </graphics>
+  </place>
+  <transition id="t-A98-73D2B-14">
+  <name>
+   <text>t0</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="80" y="30"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D2E-15">
+  <name>
+   <text>t1</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="20" y="85"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D2F-16">
+  <name>
+   <text>t11</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="290" y="320"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D30-17">
+  <name>
+   <text>t12</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="395" y="320"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D31-18">
+  <name>
+   <text>t13</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="445" y="375"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D32-19">
+  <name>
+   <text>t2</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="80" y="145"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D40-20">
+  <name>
+   <text>t3</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="155" y="85"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D41-21">
+  <name>
+   <text>t4</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="220" y="140"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D42-22">
+  <name>
+   <text>t5</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="155" y="200"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D42-23">
+  <name>
+   <text>t6</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="220" y="265"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D44-24">
+  <name>
+   <text>t7</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="200"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D45-25">
+  <name>
+   <text>t8</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="345" y="260"/>
+   </graphics>
+  </transition>
+  <transition id="t-A98-73D45-26">
+  <name>
+   <text>t9</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="345" y="380"/>
+   </graphics>
+  </transition>
+  <arc id="e-A98-73D47-27" source="p-A98-73D28-11" target="t-A98-73D45-25">
+  </arc>
+  <arc id="e-A98-73D48-28" source="t-A98-73D45-25" target="p-A98-73D24-8">
+  </arc>
+  <arc id="e-A98-73D48-29" source="p-A98-73D17-2" target="t-A98-73D2B-14">
+  </arc>
+  <arc id="e-A98-73D49-30" source="t-A98-73D2B-14" target="p-A98-73D1F-3">
+  </arc>
+  <arc id="e-A98-73D4A-31" source="p-A98-73D1F-3" target="t-A98-73D2E-15">
+  </arc>
+  <arc id="e-A98-73D4A-32" source="t-A98-73D2E-15" target="p-A98-73D22-6">
+  </arc>
+  <arc id="e-A98-73D4A-33" source="p-A98-73D22-6" target="t-A98-73D32-19">
+  </arc>
+  <arc id="e-A98-73D4B-34" source="t-A98-73D32-19" target="p-A98-73D1F-3">
+  </arc>
+  <arc id="e-A98-73D4B-35" source="p-A98-73D1F-3" target="t-A98-73D40-20">
+  </arc>
+  <arc id="e-A98-73D4C-36" source="t-A98-73D40-20" target="p-A98-73D23-7">
+  </arc>
+  <arc id="e-A98-73D4C-37" source="p-A98-73D23-7" target="t-A98-73D41-21">
+  </arc>
+  <arc id="e-A98-73D4D-38" source="t-A98-73D44-24" target="p-A98-73D28-11">
+  </arc>
+  <arc id="e-A98-73D4E-39" source="t-A98-73D41-21" target="p-A98-73D17-2">
+  </arc>
+  <arc id="e-A98-73D4E-40" source="t-A98-73D31-18" target="p-A98-73D2A-13">
+  </arc>
+  <arc id="e-A98-73D4F-41" source="p-A98-73D22-5" target="t-A98-73D31-18">
+  </arc>
+  <arc id="e-A98-73D4F-42" source="t-A98-73D30-17" target="p-A98-73D22-5">
+  </arc>
+  <arc id="e-A98-73D50-43" source="p-A98-73D29-12" target="t-A98-73D30-17">
+  </arc>
+  <arc id="e-A98-73D50-44" source="t-A98-73D45-26" target="p-A98-73D29-12">
+  </arc>
+  <arc id="e-A98-73D51-45" source="p-A98-73D20-4" target="t-A98-73D45-26">
+  </arc>
+  <arc id="e-A98-73D51-46" source="t-A98-73D2F-16" target="p-A98-73D20-4">
+  </arc>
+  <arc id="e-A98-73D52-47" source="p-A98-73D29-12" target="t-A98-73D2F-16">
+  </arc>
+  <arc id="e-A98-73D52-48" source="p-A98-73D2A-13" target="t-A98-73D45-25">
+  </arc>
+  <arc id="e-A98-73D52-49" source="p-A98-73D26-9" target="t-A98-73D44-24">
+  </arc>
+  <arc id="e-A98-73D54-50" source="t-A98-73D45-25" target="p-A98-73D29-12">
+  </arc>
+  <arc id="e-A98-73D54-51" source="t-A98-73D42-23" target="p-A98-73D26-9">
+  </arc>
+  <arc id="e-A98-73D55-52" source="p-A98-73D27-10" target="t-A98-73D42-23">
+  </arc>
+  <arc id="e-A98-73D55-53" source="t-A98-73D42-22" target="p-A98-73D27-10">
+  </arc>
+  <arc id="e-A98-73D56-54" source="p-A98-73D26-9" target="t-A98-73D42-22">
+  </arc>
+  <arc id="e-A98-73D56-55" source="t-A98-73D41-21" target="p-A98-73D26-9">
+  </arc>
+  <arc id="e-A98-73D56-56" source="p-A98-73D24-8" target="t-A98-73D41-21">
+  </arc>
+ </page>
+ </net>
+</pnml>

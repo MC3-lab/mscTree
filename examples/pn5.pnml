@@ -1,0 +1,1183 @@
+<?xml version="1.0"?>
+<!--created Mon Nov 21 00:27:23 2022 by ndrio version 3.7.0-->
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+ <net id="n-45B0-8724D-0" type ="http://www.pnml.org/version-2009/grammar/ptnet">
+  <name>
+   <text>paperExFig4-5-exp-par</text>
+  </name>
+ <page id="g-45B0-87280-1">
+  <place id="p-45B0-87284-2">
+  <name>
+   <text>p0</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="365" y="210"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8729C-3">
+  <name>
+   <text>p1</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="490"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8729F-4">
+  <name>
+   <text>p10</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="405" y="1180"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872A2-5">
+  <name>
+   <text>p11</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="595" y="1170"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872A3-6">
+  <name>
+   <text>p12</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="310"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872A5-7">
+  <name>
+   <text>p13</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="365" y="330"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872A6-8">
+  <name>
+   <text>p14</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="475" y="320"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872A9-9">
+  <name>
+   <text>p15</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="670"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872AA-10">
+  <name>
+   <text>p16</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="75" y="690"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872AB-11">
+  <name>
+   <text>p17</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="670"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872AD-12">
+  <name>
+   <text>p18</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="765" y="660"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872AE-13">
+  <name>
+   <text>p19</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="1050"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872B1-14">
+  <name>
+   <text>p2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="375" y="490"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872B2-15">
+  <name>
+   <text>p20</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="385" y="1050"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872B3-16">
+  <name>
+   <text>p21</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="1030"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872B5-17">
+  <name>
+   <text>p22</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1405" y="360"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872B7-18">
+  <name>
+   <text>p23</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1520" y="360"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872B9-19">
+  <name>
+   <text>p24</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1300" y="695"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-872BA-20">
+  <name>
+   <text>p25</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1410" y="700"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87333-21">
+  <name>
+   <text>p26</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1515" y="700"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87335-22">
+  <name>
+   <text>p27</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1615" y="690"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87337-23">
+  <name>
+   <text>p28</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1420" y="1000"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87339-24">
+  <name>
+   <text>p29</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1545" y="1005"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8733A-25">
+  <name>
+   <text>p3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="485" y="470"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8733C-26">
+  <name>
+   <text>p30</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1295" y="530"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8733D-27">
+  <name>
+   <text>p31</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1410" y="535"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87342-28">
+  <name>
+   <text>p32</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1520" y="540"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87343-29">
+  <name>
+   <text>p33</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1610" y="540"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87345-30">
+  <name>
+   <text>p34</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1480" y="850"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87346-31">
+  <name>
+   <text>p35</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1290" y="860"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87347-32">
+  <name>
+   <text>p36</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1610" y="835"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8734A-33">
+  <name>
+   <text>p37</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1425" y="1145"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8734B-34">
+  <name>
+   <text>p38</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1545" y="1145"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8734D-35">
+  <name>
+   <text>p39</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="850" y="170"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-8734E-36">
+  <name>
+   <text>p4</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="125" y="480"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87351-37">
+  <name>
+   <text>p40</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <initialMarking>
+    <text>1</text>
+   </initialMarking>
+   <graphics>
+    <position x="920" y="50"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87354-38">
+  <name>
+   <text>p41</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="985" y="170"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87357-39">
+  <name>
+   <text>p5</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="665" y="470"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87358-40">
+  <name>
+   <text>p6</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="890"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87381-41">
+  <name>
+   <text>p7</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="395" y="890"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87384-42">
+  <name>
+   <text>p8</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="585" y="880"/>
+   </graphics>
+  </place>
+  <place id="p-45B0-87385-43">
+  <name>
+   <text>p9</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="1190"/>
+   </graphics>
+  </place>
+  <transition id="t-45B0-87387-44">
+  <name>
+   <text>t0</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="260"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-8738A-45">
+  <name>
+   <text>t1</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="365" y="270"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-8738D-46">
+  <name>
+   <text>t10</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="285" y="390"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-8738E-47">
+  <name>
+   <text>t11</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="375" y="390"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87390-48">
+  <name>
+   <text>t12</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="475" y="390"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87392-49">
+  <name>
+   <text>t13</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="730"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87393-50">
+  <name>
+   <text>t14</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="105" y="760"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87395-51">
+  <name>
+   <text>t15</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="730"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87396-52">
+  <name>
+   <text>t16</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="725" y="730"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87398-53">
+  <name>
+   <text>t17</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="165" y="1100"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-8739A-54">
+  <name>
+   <text>t18</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="385" y="1100"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-8739D-55">
+  <name>
+   <text>t19</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="565" y="1090"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-8739E-56">
+  <name>
+   <text>t2</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="465" y="270"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873A0-57">
+  <name>
+   <text>t20</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1410" y="295"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873A2-58">
+  <name>
+   <text>t21</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1520" y="300"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873A4-59">
+  <name>
+   <text>t22</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1410" y="440"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873A6-60">
+  <name>
+   <text>t23</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1520" y="440"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873CC-61">
+  <name>
+   <text>t24</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1300" y="620"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873CF-62">
+  <name>
+   <text>t25</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1405" y="630"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873D0-63">
+  <name>
+   <text>t26</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1520" y="635"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873D2-64">
+  <name>
+   <text>t27</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1615" y="625"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873D3-65">
+  <name>
+   <text>t28</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1300" y="775"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873D4-66">
+  <name>
+   <text>t29</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1415" y="765"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873D7-67">
+  <name>
+   <text>t3</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="45" y="610"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873D8-68">
+  <name>
+   <text>t30</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1515" y="765"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873DA-69">
+  <name>
+   <text>t31</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1610" y="755"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873DC-70">
+  <name>
+   <text>t32</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1425" y="930"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873DE-71">
+  <name>
+   <text>t33</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1545" y="940"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873DF-72">
+  <name>
+   <text>t34</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1420" y="1070"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873E2-73">
+  <name>
+   <text>t35</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1540" y="1075"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873E3-74">
+  <name>
+   <text>t36</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="775" y="190"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873E5-75">
+  <name>
+   <text>t37</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="1050" y="195"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873E6-76">
+  <name>
+   <text>t38</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="920" y="100"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873E7-77">
+  <name>
+   <text>t4</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="195" y="590"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873EA-78">
+  <name>
+   <text>t42</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="690" y="1185"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873EB-79">
+  <name>
+   <text>t43</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="40" y="1195"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873FB-80">
+  <name>
+   <text>t5</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="575" y="590"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873FC-81">
+  <name>
+   <text>t6</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="765" y="590"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-873FF-82">
+  <name>
+   <text>t7</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="185" y="990"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87400-83">
+  <name>
+   <text>t8</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="405" y="970"/>
+   </graphics>
+  </transition>
+  <transition id="t-45B0-87402-84">
+  <name>
+   <text>t9</text>
+    <graphics>
+     <offset x="0" y="0" />
+    </graphics>
+  </name>
+   <graphics>
+    <position x="605" y="980"/>
+   </graphics>
+  </transition>
+  <arc id="e-45B0-8740A-85" source="p-45B0-87354-38" target="t-45B0-873E5-75">
+  </arc>
+  <arc id="e-45B0-8740F-86" source="t-45B0-87402-84" target="p-45B0-872B3-16">
+  </arc>
+  <arc id="e-45B0-8740F-87" source="p-45B0-872B3-16" target="t-45B0-8739D-55">
+  </arc>
+  <arc id="e-45B0-87410-88" source="t-45B0-8739D-55" target="p-45B0-872A2-5">
+  </arc>
+  <arc id="e-45B0-87412-89" source="p-45B0-87381-41" target="t-45B0-87400-83">
+   <inscription>
+    <text>3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-87414-90" source="p-45B0-87358-40" target="t-45B0-873FF-82">
+  </arc>
+  <arc id="e-45B0-87415-91" source="t-45B0-873D7-67" target="p-45B0-8734E-36">
+  </arc>
+  <arc id="e-45B0-87415-92" source="p-45B0-8734E-36" target="t-45B0-873E7-77">
+  </arc>
+  <arc id="e-45B0-87416-93" source="p-45B0-8729C-3" target="t-45B0-873E7-77">
+  </arc>
+  <arc id="e-45B0-87416-94" source="p-45B0-87384-42" target="t-45B0-87402-84">
+  </arc>
+  <arc id="e-45B0-87417-95" source="t-45B0-873FC-81" target="p-45B0-87357-39">
+  </arc>
+  <arc id="e-45B0-87419-96" source="t-45B0-873E6-76" target="p-45B0-87354-38">
+  </arc>
+  <arc id="e-45B0-8741A-97" source="p-45B0-8733A-25" target="t-45B0-873FB-80">
+  </arc>
+  <arc id="e-45B0-8741B-98" source="p-45B0-87357-39" target="t-45B0-873FB-80">
+  </arc>
+  <arc id="e-45B0-8741B-99" source="p-45B0-87284-2" target="t-45B0-8739E-56">
+  </arc>
+  <arc id="e-45B0-8741C-100" source="p-45B0-87284-2" target="t-45B0-8738A-45">
+  </arc>
+  <arc id="e-45B0-8741D-101" source="p-45B0-87284-2" target="t-45B0-87387-44">
+  </arc>
+  <arc id="e-45B0-8741D-102" source="t-45B0-87387-44" target="p-45B0-872A3-6">
+  </arc>
+  <arc id="e-45B0-8741E-103" source="p-45B0-872A3-6" target="t-45B0-8738D-46">
+  </arc>
+  <arc id="e-45B0-87421-104" source="t-45B0-8738D-46" target="p-45B0-8729C-3">
+  </arc>
+  <arc id="e-45B0-87421-105" source="t-45B0-8738A-45" target="p-45B0-872A5-7">
+  </arc>
+  <arc id="e-45B0-87422-106" source="p-45B0-872A5-7" target="t-45B0-8738E-47">
+  </arc>
+  <arc id="e-45B0-87423-107" source="t-45B0-873E6-76" target="p-45B0-8734D-35">
+  </arc>
+  <arc id="e-45B0-87423-108" source="t-45B0-8738E-47" target="p-45B0-872B1-14">
+  </arc>
+  <arc id="e-45B0-87424-109" source="t-45B0-8739E-56" target="p-45B0-872A6-8">
+  </arc>
+  <arc id="e-45B0-87425-110" source="p-45B0-872A6-8" target="t-45B0-87390-48">
+  </arc>
+  <arc id="e-45B0-87425-111" source="t-45B0-87390-48" target="p-45B0-8733A-25">
+  </arc>
+  <arc id="e-45B0-87427-112" source="t-45B0-873E7-77" target="p-45B0-872A9-9">
+  </arc>
+  <arc id="e-45B0-87428-113" source="p-45B0-872A9-9" target="t-45B0-87392-49">
+  </arc>
+  <arc id="e-45B0-87429-114" source="t-45B0-87392-49" target="p-45B0-87358-40">
+  </arc>
+  <arc id="e-45B0-87429-115" source="t-45B0-87392-49" target="p-45B0-87381-41">
+  </arc>
+  <arc id="e-45B0-8742A-116" source="t-45B0-873FB-80" target="p-45B0-872AB-11">
+  </arc>
+  <arc id="e-45B0-87438-117" source="p-45B0-872AB-11" target="t-45B0-87395-51">
+  </arc>
+  <arc id="e-45B0-87439-118" source="p-45B0-87351-37" target="t-45B0-873E6-76">
+  </arc>
+  <arc id="e-45B0-8743D-119" source="t-45B0-87395-51" target="p-45B0-87384-42">
+  </arc>
+  <arc id="e-45B0-8743E-120" source="t-45B0-87395-51" target="p-45B0-87381-41">
+  </arc>
+  <arc id="e-45B0-8743F-121" source="p-45B0-87384-42" target="t-45B0-87396-52">
+  </arc>
+  <arc id="e-45B0-8743F-122" source="t-45B0-87396-52" target="p-45B0-872AD-12">
+  </arc>
+  <arc id="e-45B0-87440-123" source="p-45B0-872AD-12" target="t-45B0-873FC-81">
+  </arc>
+  <arc id="e-45B0-87441-124" source="p-45B0-87358-40" target="t-45B0-87393-50">
+  </arc>
+  <arc id="e-45B0-87441-125" source="t-45B0-87393-50" target="p-45B0-872AA-10">
+  </arc>
+  <arc id="e-45B0-87442-126" source="p-45B0-872AA-10" target="t-45B0-873D7-67">
+  </arc>
+  <arc id="e-45B0-87444-127" source="t-45B0-873FF-82" target="p-45B0-872AE-13">
+  </arc>
+  <arc id="e-45B0-87445-128" source="p-45B0-872AE-13" target="t-45B0-87398-53">
+  </arc>
+  <arc id="e-45B0-87446-129" source="t-45B0-873EB-79" target="p-45B0-87284-2">
+   <graphics>
+    <position x="17" y="914" />
+    <position x="83" y="260" />
+   </graphics>  </arc>
+  <arc id="e-45B0-8744B-130" source="t-45B0-87398-53" target="p-45B0-87385-43">
+  </arc>
+  <arc id="e-45B0-8744C-131" source="t-45B0-87400-83" target="p-45B0-872B2-15">
+  </arc>
+  <arc id="e-45B0-8744D-132" source="p-45B0-872B2-15" target="t-45B0-8739A-54">
+  </arc>
+  <arc id="e-45B0-8744F-133" source="t-45B0-873A0-57" target="p-45B0-872B5-17">
+  </arc>
+  <arc id="e-45B0-87450-134" source="p-45B0-872B5-17" target="t-45B0-873A4-59">
+  </arc>
+  <arc id="e-45B0-87450-135" source="t-45B0-873A2-58" target="p-45B0-872B7-18">
+  </arc>
+  <arc id="e-45B0-87451-136" source="p-45B0-872B7-18" target="t-45B0-873A6-60">
+  </arc>
+  <arc id="e-45B0-87452-137" source="t-45B0-873CC-61" target="p-45B0-872B9-19">
+  </arc>
+  <arc id="e-45B0-87453-138" source="p-45B0-872B9-19" target="t-45B0-873D3-65">
+  </arc>
+  <arc id="e-45B0-87453-139" source="t-45B0-873CF-62" target="p-45B0-872BA-20">
+  </arc>
+  <arc id="e-45B0-87454-140" source="p-45B0-87385-43" target="t-45B0-873EB-79">
+  </arc>
+  <arc id="e-45B0-87456-141" source="p-45B0-872BA-20" target="t-45B0-873D4-66">
+  </arc>
+  <arc id="e-45B0-87457-142" source="t-45B0-873D0-63" target="p-45B0-87333-21">
+  </arc>
+  <arc id="e-45B0-87458-143" source="p-45B0-87333-21" target="t-45B0-873D8-68">
+  </arc>
+  <arc id="e-45B0-87458-144" source="t-45B0-873D2-64" target="p-45B0-87335-22">
+  </arc>
+  <arc id="e-45B0-87459-145" source="p-45B0-87335-22" target="t-45B0-873DA-69">
+  </arc>
+  <arc id="e-45B0-8745A-146" source="t-45B0-873DC-70" target="p-45B0-87337-23">
+  </arc>
+  <arc id="e-45B0-8745A-147" source="p-45B0-87337-23" target="t-45B0-873DF-72">
+  </arc>
+  <arc id="e-45B0-8745B-148" source="t-45B0-873DE-71" target="p-45B0-87339-24">
+  </arc>
+  <arc id="e-45B0-8745D-149" source="p-45B0-87339-24" target="t-45B0-873E2-73">
+  </arc>
+  <arc id="e-45B0-8745E-150" source="t-45B0-873A4-59" target="p-45B0-8733D-27">
+  </arc>
+  <arc id="e-45B0-8745F-151" source="t-45B0-873EA-78" target="p-45B0-87284-2">
+   <graphics>
+    <position x="809" y="989" />
+    <position x="714" y="237" />
+   </graphics>  </arc>
+  <arc id="e-45B0-87461-152" source="t-45B0-873A6-60" target="p-45B0-8733D-27">
+  </arc>
+  <arc id="e-45B0-87462-153" source="t-45B0-873A4-59" target="p-45B0-87342-28">
+  </arc>
+  <arc id="e-45B0-87462-154" source="t-45B0-873A6-60" target="p-45B0-87342-28">
+  </arc>
+  <arc id="e-45B0-87464-155" source="p-45B0-8733D-27" target="t-45B0-873CF-62">
+  </arc>
+  <arc id="e-45B0-87465-156" source="p-45B0-8733C-26" target="t-45B0-873CF-62">
+  </arc>
+  <arc id="e-45B0-87466-157" source="p-45B0-8733C-26" target="t-45B0-873CC-61">
+  </arc>
+  <arc id="e-45B0-87466-158" source="p-45B0-8733D-27" target="t-45B0-873CC-61">
+  </arc>
+  <arc id="e-45B0-87467-159" source="p-45B0-87342-28" target="t-45B0-873D0-63">
+  </arc>
+  <arc id="e-45B0-87468-160" source="p-45B0-87343-29" target="t-45B0-873D0-63">
+  </arc>
+  <arc id="e-45B0-87476-161" source="p-45B0-87342-28" target="t-45B0-873D2-64">
+  </arc>
+  <arc id="e-45B0-87477-162" source="p-45B0-872A2-5" target="t-45B0-873EA-78">
+  </arc>
+  <arc id="e-45B0-8747B-163" source="p-45B0-87343-29" target="t-45B0-873D2-64">
+  </arc>
+  <arc id="e-45B0-8747B-164" source="t-45B0-873D4-66" target="p-45B0-87345-30">
+  </arc>
+  <arc id="e-45B0-8747C-165" source="t-45B0-873D8-68" target="p-45B0-87345-30">
+  </arc>
+  <arc id="e-45B0-8747D-166" source="p-45B0-87345-30" target="t-45B0-873DC-70">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-8747E-167" source="p-45B0-87345-30" target="t-45B0-873DE-71">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-8747F-168" source="t-45B0-873D3-65" target="p-45B0-87346-31">
+  </arc>
+  <arc id="e-45B0-87483-169" source="t-45B0-873DA-69" target="p-45B0-87347-32">
+  </arc>
+  <arc id="e-45B0-87484-170" source="t-45B0-873DF-72" target="p-45B0-8734A-33">
+  </arc>
+  <arc id="e-45B0-87485-171" source="t-45B0-873E2-73" target="p-45B0-8734B-34">
+  </arc>
+  <arc id="e-45B0-87485-172" source="p-45B0-8734A-33" target="t-45B0-873A0-57">
+   <graphics>
+    <position x="1256" y="1183" />
+    <position x="1261" y="318" />
+   </graphics>  </arc>
+  <arc id="e-45B0-87487-173" source="t-45B0-8739A-54" target="p-45B0-8729F-4">
+  </arc>
+  <arc id="e-45B0-87488-174" source="p-45B0-8734B-34" target="t-45B0-873A2-58">
+   <graphics>
+    <position x="1701" y="1175" />
+    <position x="1694" y="332" />
+   </graphics>  </arc>
+  <arc id="e-45B0-8748B-175" source="p-45B0-8734D-35" target="t-45B0-873E3-74">
+  </arc>
+  <arc id="e-45B0-8748C-176" source="t-45B0-873E5-75" target="p-45B0-8733C-26">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-8748D-177" source="t-45B0-873E5-75" target="p-45B0-8733D-27">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-8748E-178" source="t-45B0-873E5-75" target="p-45B0-87342-28">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-8748F-179" source="t-45B0-873E5-75" target="p-45B0-87343-29">
+   <inscription>
+    <text>2</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-87491-180" source="t-45B0-873E3-74" target="p-45B0-87284-2">
+   <inscription>
+    <text>3</text>
+    <graphics>
+     <offset x="0" y="-10" />
+    </graphics>
+   </inscription>
+  </arc>
+  <arc id="e-45B0-87492-181" source="t-45B0-873E3-74" target="p-45B0-87357-39">
+  </arc>
+  <arc id="e-45B0-87492-182" source="t-45B0-873E3-74" target="p-45B0-8734E-36">
+  </arc>
+ </page>
+ </net>
+</pnml>

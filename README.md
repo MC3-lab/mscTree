@@ -3,39 +3,40 @@
 Implementation of the maximal step-computation tree to compute collective reveals relations on Petri nets.
 The inputs are a bounded and equal-conflicts Petri net and a collective reveals relation.
 The output states if the collective reveals relation is satisfied on the input net.
-The net is specified by its two incidence matrices and by its initial marking.
-Collective reveals is specified by two lists of transitions, x and y, and by a natural number n. 
+The net must be provided in a pnml file; alternatively, a user can directly give a PTnet object,
+made of two incidence matrices and an initial marking, all in the form of numpy arrays.
+Collective reveals is specified a triple: the first element is the list x of all the revealing transitions,
+the second element is the list y of revealed transition, and the thirs element is a natural number n.
+The transitions must be specified with their id in the pnml file.
 The program checks if in all the maximal runs of the net, n occurrences of transitions in x reveals at least 
 a transition in y.
-It has three possible output values: 
-- n times x collective reveals y
-- there is at least a maximal run with n occurrences of x and none of y
-- there is no maximal run with n occurrences of x.
+It has two possible output values: 
+- true, if the relation holds or there is no maximal run with n occurrences of x; 
+- false, if the relation does not hold
 
 Requirements:
-Python3, numpy, itertools, sys, getopt, numba
+Python3, numpy, itertools, sys, getopt
 
-Current use:
-Run gentree.py with python3 and specify the net and the collective reveals relation as follows:
-1. The net can be in a text file represented as PTnet(<input_incidence_matrix>, <output_incidence_matrix>, <initial_marking>)
-all these 3 elements must be expressed as numpy array (see examples with txt extensions).
+How to use:
+Run collrev.py with python3 and specify the net and the collective reveals relation as follows:
+1. If the net is in a pnml file, use the option -p followed by the name of the file.
+Alternatively, the net can be in a text file represented as PTnet(<input_incidence_matrix>, <output_incidence_matrix>, <initial_marking>).
+All these 3 elements must be expressed as numpy array (see examples with txt extensions).
 If this is the case, the option to be used is -t.
 Alternatively, the program can read a pnml file, with the option -p followed by the name of the file
-2. The reveals relation can be both in a txt file or in a string directly given on the command line;
-its a triple represented as (<list_revealing_events>, <list_revealed_events>, number_of_occurrences).
-(TO FIX: also if the file is passed with pnml, the transitions in the reveals relation need to be
-passed with their column number in the incidence matrix)
+2. The reveals relation can be both in a file or in a string directly given on the command line;
+in the first case, use the option -f, otherwise no option is needed.
+In both cases the relation must be a triple represented as (<list_revealing_events>, <list_revealed_events>, number_of_occurrences).
+3. The program can also be executed in interactive mode, in this case, the user needs to specify a PT system followed by the
+option -i. The tool constructs a structure on which all the collective reveals relations can be computed, and asks
+which collective reveals relation needs to be checked. Users can check any number of collective reveals relations, and type quit to
+end the session. This mode is generally slower than the one in which the formula is given since the beginning, so it is adviced to
+use only if the user needs to check several relations.
+4. If the user needs to check a large number or all the reveals relations on the PT system, it can specify the name of the net as described above, 
+followed by the option -a. 
 
-On the command line, you can write: python3 gentree.py -t <path_file_PTnet> -f <name_file_reveals>
-or python3 gentree.py -t <name_file_PTnet> "rev_relations".
-There is a third possibility, if you want to produce the tree and test more reveals relations on it, 
-consisting in using the option -i after the name of the file with the net. In this case, the program 
-computes the tree and starts an interactive mode, therefore you can try as many formulas as you like without
-computing everytime the tree. When you are done, tipe "quit()" to exit.
-For some reason, after the -i you need to add a string, it is not really used in the program, so everything
-you type is ok (it needs to be fixed). In this last case, the command would be something like:
-python3 gentree.py -t <path_file_PTnet> -i randomCrap.
-
-Example: python3 gentree.py -t examples/net1.txt -f examples/rev1.txt
-or
-python3 gentree.py -t examples/net1.txt "([0,2],[1], 2)"
+Examples:
+- python3 collrev.py -p examples/net1.pnml -f examples/rev1.txt
+- python3 collrev.py -p examples/net1.pnml "(['id1', 'id2'], ['id3', 'id4'], 5)"
+- python3 collrev.py -p examples/net1.pnml -i
+- python3 collrev.py -p examples/net1.pnml -a

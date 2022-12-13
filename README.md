@@ -22,7 +22,6 @@ Run collrev.py with python3 and specify the net and the collective reveals relat
 1. If the net is in a PNML file, use the option -p followed by the name of the file.
 Alternatively, the net can be in a text file represented as PTnet(<input_incidence_matrix>, <output_incidence_matrix>, <initial_marking>).
 All these three elements must be expressed as numpy array. 
-[//]: # (see examples with txt extensions).
 If this is the case, the option to be used is -t.
 2. The reveals relation can be either in a file or in a string given as argument on the command line;
 in the first case, use the option -f, otherwise no option is needed.

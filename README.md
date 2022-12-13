@@ -3,7 +3,7 @@
 Implementation of the maximal step-computation tree to compute collective reveals relations on Petri nets.
 The inputs are a bounded and equal-conflicts Petri net and a collective reveals relation.
 The output states if the collective reveals relation is satisfied on the input net.
-The net must be provided in a PNML file; alternatively, a user can directly give a PTnet object,
+The net must be provided in a PNML file in the 2009 version; alternatively, a user can directly give a PTnet object,
 made of two incidence matrices and an initial marking, all in the form of numpy arrays.
 Collective reveals is specified by a triple *(x, y, n)*: the first element is the list *x* of all the revealing transitions,
 the second element is the list *y* of revealed transition, and the third element is a natural number *n*.
